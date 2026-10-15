@@ -69,23 +69,23 @@ p { margin: 0; }
 .topbar b { color: #fff; font-weight: 600; }
 .live { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22b35e; margin-right: 8px; vertical-align: 1px; animation: pulse 2.4s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,179,94,.55); } 70% { box-shadow: 0 0 0 8px rgba(34,179,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,179,94,0); } }
-.header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--ink); border-bottom: 1px solid rgba(255,255,255,.08); }
+.header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 6px 24px -18px rgba(14,15,17,.35); }
 .header .container { display: flex; align-items: stretch; gap: 28px; min-height: 82px; }
-.logo { display: flex; align-items: center; width: 240px; color: #fff; flex: none; }
+.logo { display: flex; align-items: center; width: 240px; color: var(--ink); flex: none; }
 .logo svg { width: 100%; height: auto; }
-.menu { display: flex; align-items: stretch; margin-left: auto; font-size: 14px; font-weight: 600; color: #fff; white-space: nowrap; }
+.menu { display: flex; align-items: stretch; margin-left: auto; font-size: 14px; font-weight: 600; color: var(--ink); white-space: nowrap; }
 .menu a { display: flex; align-items: center; padding: 0 13px; text-decoration: none; border-top: 3px solid transparent; }
-.menu a:hover { color: var(--red-light); }
-.menu a.active { border-top-color: var(--red); background: rgba(255,255,255,.06); }
+.menu a:hover { color: var(--red); }
+.menu a.active { border-top-color: var(--red); background: var(--alt); }
 .header .cta { display: flex; align-items: center; }
 .header .cta .btn { min-height: 46px; padding: 0 22px; white-space: nowrap; }
-.burger { display: none; align-self: center; margin-left: auto; width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
+.burger { display: none; align-self: center; margin-left: auto; width: 46px; height: 46px; border: 2px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
 .burger svg { width: 22px; height: 22px; }
 @media (max-width: 1160px) {
-  .menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--ink); padding: 8px max(20px, env(safe-area-inset-right, 0px)) 18px max(20px, env(safe-area-inset-left, 0px)); }
+  .menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #fff; border-bottom: 1px solid var(--line); padding: 8px max(20px, env(safe-area-inset-right, 0px)) 18px max(20px, env(safe-area-inset-left, 0px)); }
   .menu.open { display: flex; }
-  .menu a { padding: 13px 0; border-top: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .menu a.active { background: none; color: var(--red-light); }
+  .menu a { padding: 13px 0; border-top: 0; border-bottom: 1px solid var(--line); }
+  .menu a.active { background: none; color: var(--red); }
   .burger { display: block; }
   .header .cta { display: none; }
   .logo { width: 190px; }
@@ -400,7 +400,7 @@ p { margin: 0; }
       <a href="#faq">FAQ</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
-    <div class="cta"><a class="btn btn--white" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
+    <div class="cta"><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
     <button class="burger" id="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </header>
