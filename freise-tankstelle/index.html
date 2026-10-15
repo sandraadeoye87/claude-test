@@ -138,8 +138,11 @@ p { margin: 0; }
 .step-text { margin-top: 14px; color: var(--text); }
 .step-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 22px; padding: 16px 18px; border-radius: 14px; background: var(--alt); font-size: 15px; color: var(--text); }
 .step-note::before { content: "!"; flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; font-size: 13px; margin-top: 1px; }
-.step-note a, .step-link a { color: var(--ink); font-weight: 700; }
-.step-link { margin-top: 20px; font-size: 15px; color: var(--text); }
+.step-note a { color: var(--ink); font-weight: 700; }
+.step-link { margin-top: 24px; font-size: 15px; color: var(--text); }
+.step-link .btn { margin-top: 14px; min-height: 46px; padding: 0 24px; font-size: 14px; }
+.step-pair { padding-bottom: 36px; }
+@media (max-width: 900px) { .step-pair { padding-bottom: 0; } }
 /* Startstück mit Punkt 1 */
 .start { position: relative; }
 .start i { position: absolute; top: 25px; bottom: 0; left: calc(50% - 2.5px); width: 5px; background: var(--ink); }
@@ -321,7 +324,7 @@ p { margin: 0; }
 .footer .kicker { display: flex; color: #fff; margin: 0 0 16px; line-height: 1.5; }
 .footer .kicker::before { background: var(--red); }
 .f-links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
-.footer .flogo { display: block; width: 210px; color: #fff; }
+.footer .flogo { display: block; width: 270px; max-width: 100%; color: #fff; }
 .f-claim { margin-top: 22px; max-width: 40ch; }
 .f-contact { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 14px; }
 .f-contact li { display: flex; gap: 14px; align-items: center; color: #fff; font-weight: 400; line-height: 1.45; }
@@ -476,7 +479,7 @@ p { margin: 0; }
         <span class="kicker">Schritt 4</span>
         <h3 class="step-title">Beleg entnehmen</h3>
         <p class="step-text">Nach dem Tankvorgang können Sie Ihren Tankbeleg bei Bedarf am Automaten anfordern. Sie bezahlen nur den Betrag, den Sie tatsächlich getankt haben.</p>
-        <p class="step-link">Beleg vergessen oder nicht erhalten? <a href="#anfrage" data-topic="Tankbeleg anfordern">Tankbeleg digital anfordern →</a></p>
+        <div class="step-link"><p>Beleg vergessen oder nicht erhalten?</p><a class="btn btn--red" href="#anfrage" data-topic="Tankbeleg anfordern"><svg><use href="#i-receipt"/></svg>Tankbeleg digital anfordern</a></div>
       </div>
       <div class="step-img corner-tr"><img src="img/block-beleg.jpg" alt="Tankbeleg mit Literpreis"></div>
     </div>
