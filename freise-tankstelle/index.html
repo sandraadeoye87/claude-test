@@ -251,10 +251,10 @@ p { margin: 0; }
 @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; gap: 44px; } .faq-side { position: static; } .faq details p { padding-right: 0; } }
 
 /* ---------- 7 · Tankkarte über der Karte + Kontakt ---------- */
-.map-area { position: relative; background: #ebebeb; padding-bottom: 90px; overflow: hidden; }
-.map-bg { position: absolute; width: 1300px; height: 615px; left: calc(36% - 650px); top: calc(58% - 295px); background: url("img/karte-grau.jpg") center / 100% 100% no-repeat; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); }
+.map-area { position: relative; background: #ebebeb; padding-bottom: 70px; }
+.map-bg { position: absolute; inset: 0; background: url("img/karte-grau.jpg") 68% 50% / cover no-repeat; }
 .map-area .container { position: relative; }
-.banner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-top: -150px; background: var(--red); color: #fff; border-radius: 0 70px 0 0; overflow: hidden; box-shadow: 0 40px 70px -35px rgba(14,15,17,.6); }
+.banner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-top: -440px; background: var(--red); color: #fff; border-radius: 0 70px 0 0; overflow: hidden; box-shadow: 0 40px 70px -35px rgba(14,15,17,.6); }
 .banner-visual { position: relative; background: var(--ink); min-height: 360px; display: grid; place-items: center; perspective: 1300px; overflow: hidden; }
 .banner-visual::before { content: ""; position: absolute; left: -10%; right: -10%; top: 60%; height: 14%; background: var(--red); transform: rotate(-7deg); }
 .card3d { position: relative; width: 66%; aspect-ratio: 85.6 / 54; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; animation: flip 10s ease-in-out infinite; }
@@ -284,13 +284,16 @@ p { margin: 0; }
 .ask-item svg { width: 20px; height: 20px; }
 .ask-item small { display: block; font-size: 12px; font-weight: 500; opacity: .85; }
 .ask-item:hover span { text-decoration: underline; }
-.contact-card { position: relative; z-index: 1; width: 100%; max-width: 430px; margin: 70px 0 0 auto; background: #fff; border-radius: 0 var(--corner) 0 0; overflow: hidden; box-shadow: 0 30px 60px -25px rgba(14,15,17,.45); }
-.cc-img { aspect-ratio: 1000 / 638; }
-.cc-img img { width: 100%; height: 100%; object-fit: cover; }
-.cc-body { padding: 32px 36px 34px; }
-.contact-card .h2 { font-size: 30px; }
-.contact { list-style: none; margin: 22px 0 0; padding: 0; }
-.contact li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.ask-form { margin-top: 18px !important; font-size: 15px; }
+.ask-form a { color: #fff; font-weight: 700; }
+.contact-card { position: relative; z-index: 1; width: 100%; max-width: 470px; margin: 60px 0 0 auto; background: #fff; border-radius: 0 var(--corner) 0 0; overflow: hidden; box-shadow: 0 30px 60px -25px rgba(14,15,17,.45); }
+.cc-img { aspect-ratio: 1000 / 360; }
+.cc-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.cc-body { padding: 26px 30px 28px; }
+.contact-card .h2 { font-size: 26px; }
+.contact { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; }
+.contact { list-style: none; margin: 16px 0 0; padding: 0; }
+.contact li { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
 .contact small { display: block; font-size: 13px; color: var(--text); line-height: 1.4; }
 .contact span { font-weight: 700; }
 .map-pin-label { position: absolute; left: 0; bottom: 14px; font-size: 12px; color: #555; }
@@ -305,18 +308,43 @@ p { margin: 0; }
 }
 @media (min-width: 861px) { .map-img { display: none; } }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer mit Kontaktformular ---------- */
 .footer { background: var(--ink); color: var(--on-dark-muted); font-size: 15px; }
-.footer-main { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.2fr; gap: 40px; padding-block: 70px 56px; }
-.footer h4 { margin: 0 0 16px; color: #fff; font-size: 16px; font-weight: 700; }
+.footer .rule { height: 6px; background: var(--red); }
+.footer-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; padding-block: 80px; align-items: start; }
+.footer .flogo { display: block; width: 210px; color: #fff; }
+.f-claim { margin-top: 20px; max-width: 42ch; }
+.f-contact { list-style: none; margin: 34px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; }
+.f-contact li { display: flex; gap: 14px; align-items: flex-start; color: #fff; font-weight: 600; line-height: 1.45; }
+.f-contact small { display: block; font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--on-dark-muted); margin-bottom: 2px; }
+.f-contact i { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--ink-3); color: var(--red); flex: none; }
+.f-contact svg { width: 18px; height: 18px; }
+.f-links { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.1); }
+.footer h4 { margin: 0 0 14px; color: #fff; font-size: 15px; font-weight: 700; }
 .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .footer a { text-decoration: none; }
 .footer a:hover { color: #fff; }
-.footer .flogo { display: block; width: 200px; color: #fff; margin-bottom: 18px; }
+.f-form { background: #fff; color: var(--ink); border-radius: 0 var(--corner) 0 0; padding: 40px 40px 36px; display: grid; gap: 16px; }
+.f-form .h2 { font-size: 32px; margin-bottom: 6px; }
+.f-form .kicker { margin-bottom: 0; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
+.field input, .field select, .field textarea { width: 100%; font: 400 15px/1.5 var(--font); color: var(--ink); background: var(--alt); border: 2px solid transparent; border-radius: 12px; padding: 13px 16px; outline: none; transition: border-color .2s, background .2s; }
+.field textarea { resize: vertical; min-height: 120px; }
+.field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e0f11' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; padding-right: 44px; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--ink); background-color: #fff; }
+.field .err, .check.err { color: var(--red); }
+.field.err input, .field.err select { border-color: var(--red); }
+.check { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; line-height: 1.55; color: var(--text); cursor: pointer; }
+.check input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--red); }
+.check a { color: var(--ink); font-weight: 600; text-decoration: underline; }
+.f-form .btn { justify-self: start; margin-top: 4px; }
+.f-status { font-size: 14px; font-weight: 600; color: var(--text); }
+.f-status:empty { display: none; }
 .socket { border-top: 1px solid rgba(255,255,255,.08); }
 .socket .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-block: 20px; font-size: 13px; }
-.footer .rule { height: 6px; background: var(--red); }
-@media (max-width: 860px) { .footer-main { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 960px) { .footer-main { grid-template-columns: 1fr; gap: 56px; } }
+@media (max-width: 560px) { .f-contact, .f-row, .contact { grid-template-columns: 1fr; } .f-form { padding: 30px 22px; border-radius: 0 28px 0 0; } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -336,6 +364,7 @@ p { margin: 0; }
   <symbol id="i-help" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></g></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2"/></g></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></g></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></g></symbol>
 </svg>
 
@@ -352,8 +381,8 @@ p { margin: 0; }
     <nav class="menu" id="menu" aria-label="Hauptmenü">
       <a class="active" href="#top">Startseite</a>
       <a href="#tankkarte">Tankkarte</a>
-      <a href="#bezahlen">Gutscheinkarten</a>
-      <a href="#bezahlen">Tankbeleg anfordern</a>
+      <a href="#anfrage" data-topic="Gutscheinkarte anfordern">Gutscheinkarten</a>
+      <a href="#anfrage" data-topic="Tankbeleg anfordern">Tankbeleg anfordern</a>
       <a href="#faq">FAQ</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
@@ -435,7 +464,7 @@ p { margin: 0; }
         <span class="kicker">Schritt 4</span>
         <h3 class="step-title">Beleg entnehmen</h3>
         <p class="step-text">Nach dem Tankvorgang können Sie Ihren Tankbeleg bei Bedarf am Automaten anfordern. Sie bezahlen nur den Betrag, den Sie tatsächlich getankt haben.</p>
-        <p class="step-link">Beleg vergessen oder nicht erhalten? <a href="#bezahlen">Tankbeleg digital anfordern →</a></p>
+        <p class="step-link">Beleg vergessen oder nicht erhalten? <a href="#anfrage" data-topic="Tankbeleg anfordern">Tankbeleg digital anfordern →</a></p>
       </div>
       <div class="step-img corner-tr"><img src="img/block-beleg.jpg" alt="Tankbeleg mit Literpreis"></div>
     </div>
@@ -499,15 +528,15 @@ p { margin: 0; }
       <p class="pay-note">Bitte beachten Sie, dass es bei Kartenzahlungen zu einer vorübergehenden <a href="#vorautorisierung">Vorautorisierung</a> kommen kann.</p>
     </div>
     <div class="tiles">
-      <a class="tile" href="#bezahlen"><span class="tile-ico"><svg><use href="#i-receipt"/></svg></span><div><h3>Tankbeleg anfordern</h3><p>Beleg verloren oder nicht erhalten? Hier digital nachfordern.</p></div><svg><use href="#i-arrow"/></svg></a>
-      <a class="tile" href="#tankkarte"><span class="tile-ico"><svg><use href="#i-gift"/></svg></span><div><h3>Gutscheinkarten</h3><p>Tankgutscheine zum Verschenken – erhältlich direkt bei uns. Sprechen Sie uns an.</p></div><svg><use href="#i-arrow"/></svg></a>
+      <a class="tile" href="#anfrage" data-topic="Tankbeleg anfordern"><span class="tile-ico"><svg><use href="#i-receipt"/></svg></span><div><h3>Tankbeleg anfordern</h3><p>Beleg verloren oder nicht erhalten? Hier digital nachfordern.</p></div><svg><use href="#i-arrow"/></svg></a>
+      <a class="tile" href="#anfrage" data-topic="Gutscheinkarte anfordern"><span class="tile-ico"><svg><use href="#i-gift"/></svg></span><div><h3>Gutscheinkarten</h3><p>Tankgutscheine zum Verschenken – erhältlich direkt bei uns. Einfach anfragen.</p></div><svg><use href="#i-arrow"/></svg></a>
       <a class="tile" href="#kontakt"><span class="tile-ico"><svg><use href="#i-help"/></svg></span><div><h3>Hilfe bei Problemen</h3><p>Karte abgelehnt, Zapfsäule gibt nicht frei? So erreichen Sie uns.</p></div><svg><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
 
 <!-- 6 · FAQ -->
-<section class="section alt" id="faq" style="padding-bottom:230px">
+<section class="section alt" id="faq" style="padding-bottom:530px">
   <div class="container faq-grid">
     <div class="faq-side">
       <span class="kicker">FAQ</span>
@@ -561,6 +590,7 @@ p { margin: 0; }
             <a class="ask-item" href="tel:+4953818511"><i><svg><use href="#i-phone"/></svg></i><span><small>Anrufen</small>05381 8511</span></a>
             <a class="ask-item" href="mailto:info@freise-seesen.de"><i><svg><use href="#i-mail"/></svg></i><span><small>E-Mail</small>info@freise-seesen.de</span></a>
           </div>
+          <p class="ask-form">Oder schreiben Sie uns über das <a href="#anfrage" data-topic="Tankkarte beantragen">Kontaktformular</a>.</p>
         </div>
       </div>
     </div>
@@ -576,7 +606,7 @@ p { margin: 0; }
         <li><small>Telefon</small><span>05381 8511</span></li>
         <li><small>E-Mail</small><span>info@freise-seesen.de</span></li>
       </ul>
-      <div class="btns" style="margin-top:24px"><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
+      <div class="btns" style="margin-top:20px"><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
       </div>
     </div>
   </div>
@@ -586,10 +616,42 @@ p { margin: 0; }
 <footer class="footer">
   <div class="rule" aria-hidden="true"></div>
   <div class="container footer-main">
-    <div><a class="flogo" href="#top" aria-label="Freise Seesen"><svg viewBox="0 0 325.882 61.1765" aria-hidden="true"><use href="#logo"/></svg></a><p>Automatentankstelle in Seesen-Münchehof.<br>24 Stunden geöffnet, 7 Tage die Woche.</p></div>
-    <div><h4>Tankstelle</h4><ul><li><a href="#preise">Aktuelle Preise</a></li><li><a href="#ablauf">So funktioniert's</a></li><li><a href="#kraftstoffe">Kraftstoffe</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-    <div><h4>Service</h4><ul><li><a href="#tankkarte">Tankkarte</a></li><li><a href="#bezahlen">Gutscheinkarten</a></li><li><a href="#bezahlen">Tankbeleg anfordern</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
-    <div><h4>Kontakt</h4><ul><li>Kirchberger Str. 16<br>38723 Seesen-Münchehof</li><li>05381 8511</li><li>info@freise-seesen.de</li></ul></div>
+    <div class="f-info">
+      <a class="flogo" href="#top" aria-label="Freise Seesen"><svg viewBox="0 0 325.882 61.1765" aria-hidden="true"><use href="#logo"/></svg></a>
+      <p class="f-claim">Ihre Automatentankstelle in Seesen-Münchehof. Diesel, Super E5, Super Plus und AdBlue® – rund um die Uhr.</p>
+      <ul class="f-contact">
+        <li><i><svg><use href="#i-pin"/></svg></i><span><small>Adresse</small>Kirchberger Str. 16, 38723 Seesen-Münchehof</span></li>
+        <li><i><svg><use href="#i-clock"/></svg></i><span><small>Geöffnet</small>24 Stunden · 7 Tage die Woche</span></li>
+        <li><i><svg><use href="#i-phone"/></svg></i><span><small>Telefon</small>05381 8511</span></li>
+        <li><i><svg><use href="#i-mail"/></svg></i><span><small>E-Mail</small>info@freise-seesen.de</span></li>
+      </ul>
+      <div class="f-links">
+        <div><h4>Tankstelle</h4><ul><li><a href="#preise">Aktuelle Preise</a></li><li><a href="#ablauf">So funktioniert's</a></li><li><a href="#kraftstoffe">Kraftstoffe</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+        <div><h4>Service</h4><ul><li><a href="#tankkarte">Tankkarte</a></li><li><a href="#anfrage" data-topic="Gutscheinkarte anfordern">Gutscheinkarten</a></li><li><a href="#anfrage" data-topic="Tankbeleg anfordern">Tankbeleg anfordern</a></li><li><a href="#kontakt">Standort</a></li></ul></div>
+      </div>
+    </div>
+
+    <form class="f-form" id="anfrage" novalidate>
+      <span class="kicker">Kontaktformular</span>
+      <h2 class="h2">Schreiben Sie uns.</h2>
+      <div class="f-row">
+        <label class="field"><span>Name</span><input id="f-name" name="name" type="text" autocomplete="name" required></label>
+        <label class="field"><span>E-Mail</span><input id="f-mail" name="email" type="email" autocomplete="email" required></label>
+      </div>
+      <label class="field"><span>Ihr Anliegen</span>
+        <select id="f-topic" name="anliegen" required>
+          <option value="" disabled selected>Bitte auswählen</option>
+          <option>Tankkarte beantragen</option>
+          <option>Gutscheinkarte anfordern</option>
+          <option>Tankbeleg anfordern</option>
+          <option>Frage &amp; Rückmeldung</option>
+        </select>
+      </label>
+      <label class="field"><span>Nachricht</span><textarea id="f-msg" name="nachricht" rows="4" placeholder="Bei Tankbelegen bitte Datum, ungefähre Uhrzeit, Betrag und Zahlungsart angeben."></textarea></label>
+      <label class="check"><input id="f-privacy" type="checkbox" required><span>Ich habe die <a href="#top">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verarbeitet werden.</span></label>
+      <button class="btn btn--red" type="submit">Absenden</button>
+      <p class="f-status" id="f-status" role="status"></p>
+    </form>
   </div>
   <div class="socket"><div class="container"><span>© 2026 Freise Automatentankstelle</span><span><a href="#top">Impressum</a> · <a href="#top">Datenschutz</a></span></div></div>
 </footer>
@@ -615,6 +677,23 @@ if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: re
     entries.forEach(e => { if (e.isIntersecting) { requestAnimationFrame(() => ledger.classList.remove("wait")); obs.disconnect(); } });
   }, { threshold: 0.35 }).observe(ledger);
 }
+
+/* Links mit data-topic wählen das Anliegen im Formular vor */
+const topic = document.getElementById("f-topic");
+document.querySelectorAll("[data-topic]").forEach(a => a.addEventListener("click", () => { topic.value = a.dataset.topic; }));
+/* Formular: Prüfung im Entwurf; Versand wird in WordPress angebunden */
+const form = document.getElementById("anfrage"), status = document.getElementById("f-status");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const missing = [];
+  if (!form.querySelector("#f-name").value.trim()) missing.push("Name");
+  if (!/^\S+@\S+\.\S+$/.test(form.querySelector("#f-mail").value)) missing.push("E-Mail");
+  if (!topic.value) missing.push("Anliegen");
+  if (!form.querySelector("#f-privacy").checked) missing.push("Datenschutz-Einwilligung");
+  status.style.color = missing.length ? "var(--red)" : "";
+  status.textContent = missing.length ? "Bitte ergänzen: " + missing.join(", ") + "."
+    : "Entwurf: Hier wird auf der Website das Formular versendet.";
+});
 
 const burger = document.getElementById("burger"), menu = document.getElementById("menu");
 burger.addEventListener("click", () => burger.setAttribute("aria-expanded", menu.classList.toggle("open")));
