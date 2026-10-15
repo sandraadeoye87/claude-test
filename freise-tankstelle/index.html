@@ -43,7 +43,7 @@ p { margin: 0; }
 @media (max-width: 760px) { .section { padding-block: 72px; } }
 
 /* Überzeile: roter Punkt + Versalien */
-.kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--red); }
+.kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 14px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: var(--red); }
 .kicker::before { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--red); flex: none; }
 .dark .kicker, .hero .kicker { color: #fff; }
 .dark .kicker::before, .hero .kicker::before { background: var(--red); }
@@ -264,15 +264,16 @@ p { margin: 0; }
 .loc-bar { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.35fr .9fr 1.15fr; margin-top: 380px; background: #fff; border-radius: var(--r); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(14,15,17,.5); }
 .loc-img { min-height: 150px; }
 .loc-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
-.loc-cell { padding: 28px 30px; border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; }
+.loc-cell { padding: 28px 30px; border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; }
 .loc-img + .loc-cell { border-left: 0; }
-.loc-cell small { font-size: 13px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
-.loc-cell b { font-size: 17px; font-weight: 700; line-height: 1.45; }
-.loc-cell .btn { min-height: 42px; padding: 0 20px; font-size: 14px; margin-top: 10px; }
+.loc-cell small { font-size: 13px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: var(--text); margin-bottom: 8px; }
+.loc-val { font-size: 16px; font-weight: 700; line-height: 1.6; }
+.loc-act { margin-top: auto; padding-top: 16px; }
+.loc-cell .btn { min-height: 42px; padding: 0 20px; font-size: 14px; }
 .loc-cell .btn svg { width: 16px; height: 16px; }
-.loc-line { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
+.loc-line { display: flex; align-items: center; gap: 10px; }
 .loc-line svg { width: 17px; height: 17px; color: var(--red); flex: none; }
-.loc-open { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #1a8a4a; margin-top: 4px; }
+.loc-open { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; font-size: 14px; font-weight: 600; color: #1a8a4a; }
 .loc-open::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #22b35e; }
 @media (max-width: 980px) { .loc-bar { grid-template-columns: 1fr 1fr; margin-top: 320px; } .loc-img { grid-column: 1 / -1; height: 200px; } .loc-cell { border-left: 0; border-top: 1px solid var(--line); } .loc-cell:nth-child(odd) { border-left: 1px solid var(--line); } }
 .banner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-top: -440px; background: var(--red); color: #fff; border-radius: 0 70px 0 0; overflow: hidden; box-shadow: 0 40px 70px -35px rgba(14,15,17,.6); }
@@ -316,7 +317,7 @@ p { margin: 0; }
 .footer .rule { height: 6px; background: var(--red); }
 .footer-main { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .6fr) minmax(0, 1.3fr); gap: 60px; padding-block: 80px 70px; align-items: stretch; }
 .f-links { display: grid; align-content: start; gap: 34px; }
-.footer .kicker { color: #fff; margin: 0 0 16px; line-height: 1.5; }
+.footer .kicker { display: flex; color: #fff; margin: 0 0 16px; line-height: 1.5; }
 .footer .kicker::before { background: var(--red); }
 .f-links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
 .footer .flogo { display: block; width: 210px; color: #fff; }
@@ -607,9 +608,9 @@ p { margin: 0; }
     <div class="map-m" role="img" aria-label="Karte: Tankstelle Freise an der Kirchberger Straße in Münchehof"></div>
     <div class="loc-bar">
       <div class="loc-img"><img src="img/tankstelle.jpg" alt="Die Freise Automatentankstelle an der Kirchberger Straße"></div>
-      <div class="loc-cell"><small>Adresse</small><b>Kirchberger Str. 16<br>38723 Seesen-Münchehof</b><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
-      <div class="loc-cell"><small>Geöffnet</small><b>24 Stunden<br>7 Tage die Woche</b><span class="loc-open">Jetzt geöffnet</span></div>
-      <div class="loc-cell"><small>Kontaktdaten</small><span class="loc-line"><svg><use href="#i-phone"/></svg>05381 8511</span><span class="loc-line"><svg><use href="#i-mail"/></svg>info@freise-seesen.de</span></div>
+      <div class="loc-cell"><small>Adresse</small><span class="loc-val">Kirchberger Str. 16<br>38723 Seesen-Münchehof</span><div class="loc-act"><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div></div>
+      <div class="loc-cell"><small>Geöffnet</small><span class="loc-val">24 Stunden<br>7 Tage die Woche</span><div class="loc-act"><span class="loc-open">Jetzt geöffnet</span></div></div>
+      <div class="loc-cell"><small>Kontaktdaten</small><span class="loc-val"><span class="loc-line"><svg><use href="#i-phone"/></svg>05381 8511</span><span class="loc-line"><svg><use href="#i-mail"/></svg>info@freise-seesen.de</span></span><div class="loc-act"><a class="btn btn--line" href="#anfrage">Nachricht schreiben</a></div></div>
     </div>
   </div>
 </section>
