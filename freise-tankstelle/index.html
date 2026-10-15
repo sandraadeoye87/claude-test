@@ -314,9 +314,10 @@ p { margin: 0; }
 /* ---------- Footer: links Kontakt, rechts Formular – ohne Kasten ---------- */
 .footer { background: var(--ink); color: var(--on-dark-muted); font-size: 15px; }
 .footer .rule { height: 6px; background: var(--red); }
-.footer-main { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .9fr) minmax(0, 1.25fr); gap: 60px; padding-block: 80px 70px; align-items: start; }
-.f-links { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-.f-links h4 { margin: 0 0 16px; color: #fff; font-size: 15px; font-weight: 700; }
+.footer-main { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .6fr) minmax(0, 1.3fr); gap: 60px; padding-block: 80px 70px; align-items: stretch; }
+.f-links { display: grid; align-content: start; gap: 34px; }
+.footer .kicker { color: #fff; margin: 0 0 16px; line-height: 1.5; }
+.footer .kicker::before { background: var(--red); }
 .f-links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
 .footer .flogo { display: block; width: 210px; color: #fff; }
 .f-claim { margin-top: 22px; max-width: 40ch; }
@@ -328,9 +329,10 @@ p { margin: 0; }
 .f-contact small { display: none; }
 .footer a { text-decoration: none; }
 .footer a:hover { color: #fff; }
-.f-form { display: grid; gap: 10px; }
-.f-form .kicker { color: #fff; margin-bottom: 0; }
-.f-form .h2 { font-size: 15px; font-weight: 700; letter-spacing: 0; color: #fff; margin-bottom: 6px; }
+.f-form { display: flex; flex-direction: column; gap: 10px; }
+.field--grow { flex: 1; display: flex; flex-direction: column; }
+.field--grow textarea { flex: 1; }
+.f-form .kicker { margin-bottom: 6px; }
 .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .field { display: grid; gap: 7px; font-size: 13px; font-weight: 600; color: var(--on-dark-muted); }
 .field input, .field select, .field textarea { width: 100%; font: 400 14px/1.5 var(--font); color: #fff; background: var(--ink-3); border: 1px solid transparent; border-radius: 8px; padding: 10px 14px; outline: none; transition: border-color .2s; color-scheme: dark; }
@@ -343,7 +345,7 @@ p { margin: 0; }
 .check { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; line-height: 1.55; color: var(--on-dark-muted); cursor: pointer; margin-top: 4px; }
 .check input { flex: none; width: 16px; height: 16px; margin: 1px 0 0; accent-color: var(--red); }
 .check a { color: #fff; font-weight: 600; text-decoration: underline; }
-.f-form .btn { justify-self: start; margin-top: 4px; min-height: 44px; padding: 0 26px; font-size: 14px; }
+.f-form .btn { align-self: flex-start; margin-top: 4px; min-height: 44px; padding: 0 26px; font-size: 14px; }
 .f-status { font-size: 14px; font-weight: 600; color: #fff; }
 .f-status:empty { display: none; }
 .socket { border-top: 1px solid rgba(255,255,255,.08); }
@@ -628,12 +630,12 @@ p { margin: 0; }
     </div>
 
     <nav class="f-links" aria-label="Footer-Menü">
-      <div><h4>Tankstelle</h4><ul><li><a href="#preise">Aktuelle Preise</a></li><li><a href="#ablauf">So funktioniert's</a></li><li><a href="#kraftstoffe">Kraftstoffe</a></li><li><a href="#vorautorisierung">Vorautorisierung</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-      <div><h4>Service</h4><ul><li><a href="#tankkarte">Tankkarte</a></li><li><a href="#anfrage" data-topic="Gutscheinkarte anfordern">Gutscheinkarten</a></li><li><a href="#anfrage" data-topic="Tankbeleg anfordern">Tankbeleg anfordern</a></li><li><a href="#kontakt">Standort</a></li><li><a href="#anfrage">Kontakt</a></li></ul></div>
+      <div><h4 class="kicker">Tankstelle</h4><ul><li><a href="#preise">Aktuelle Preise</a></li><li><a href="#ablauf">So funktioniert's</a></li><li><a href="#kraftstoffe">Kraftstoffe</a></li><li><a href="#vorautorisierung">Vorautorisierung</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4 class="kicker">Service</h4><ul><li><a href="#tankkarte">Tankkarte</a></li><li><a href="#anfrage" data-topic="Gutscheinkarte anfordern">Gutscheinkarten</a></li><li><a href="#anfrage" data-topic="Tankbeleg anfordern">Tankbeleg anfordern</a></li><li><a href="#kontakt">Standort</a></li><li><a href="#anfrage">Kontakt</a></li></ul></div>
     </nav>
 
     <form class="f-form" id="anfrage" novalidate>
-      <h2 class="h2">Schreiben Sie uns</h2>
+      <h2 class="kicker">Schreiben Sie uns</h2>
       <div class="f-row">
         <label class="field"><span class="sr">Name</span><input placeholder="Name" id="f-name" name="name" type="text" autocomplete="name" required></label>
         <label class="field"><span class="sr">E-Mail</span><input placeholder="E-Mail" id="f-mail" name="email" type="email" autocomplete="email" required></label>
@@ -647,7 +649,7 @@ p { margin: 0; }
           <option>Frage &amp; Rückmeldung</option>
         </select>
       </label>
-      <label class="field"><span class="sr">Nachricht</span><textarea id="f-msg" name="nachricht" rows="3" placeholder="Ihre Nachricht – bei Tankbelegen bitte Datum, Uhrzeit, Betrag und Zahlungsart angeben."></textarea></label>
+      <label class="field field--grow"><span class="sr">Nachricht</span><textarea id="f-msg" name="nachricht" rows="3" placeholder="Ihre Nachricht – bei Tankbelegen bitte Datum, Uhrzeit, Betrag und Zahlungsart angeben."></textarea></label>
       <label class="check"><input id="f-privacy" type="checkbox" required><span>Ich habe die <a href="#top">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verarbeitet werden.</span></label>
       <button class="btn btn--red" type="submit">Absenden</button>
       <p class="f-status" id="f-status" role="status"></p>
