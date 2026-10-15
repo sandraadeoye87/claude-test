@@ -265,10 +265,10 @@ p { margin: 0; }
 .map-area { position: relative; display: flow-root; background: #e8e8e8; padding-bottom: 50px; }
 .map-bg { position: absolute; inset: 0; background: url("img/karte-grau.jpg") 50% 48% / cover no-repeat; }
 .map-area .container { position: relative; }
-.loc-bar { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.35fr .9fr 1.15fr; margin-top: 380px; background: #fff; border-radius: var(--r); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(14,15,17,.5); }
+.loc-bar { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(200px, 1fr) auto auto auto; margin-top: 380px; background: #fff; border-radius: var(--r); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(14,15,17,.5); }
 .loc-img { min-height: 150px; }
 .loc-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
-.loc-cell { padding: 28px 30px; border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; }
+.loc-cell { padding: 28px 44px; border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; }
 .loc-img + .loc-cell { border-left: 0; }
 .loc-cell small { font-size: 13px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: var(--text); margin-bottom: 8px; }
 .loc-val { font-size: 16px; font-weight: 700; line-height: 1.6; }
