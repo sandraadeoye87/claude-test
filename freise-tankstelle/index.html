@@ -44,19 +44,19 @@ p { margin: 0; }
 /* Überzeile: roter Punkt + Versalien */
 .kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--red); }
 .kicker::before { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--red); flex: none; }
-.dark .kicker, .hero .kicker { color: var(--red-light); }
-.dark .kicker::before, .hero .kicker::before { background: var(--red-light); }
+.dark .kicker, .hero .kicker { color: #fff; }
+.dark .kicker::before, .hero .kicker::before { background: var(--red); }
 .h2 { font-size: clamp(32px, 4vw, 48px); }
 .lead { margin-top: 18px; font-size: 17px; color: var(--text); max-width: 62ch; }
 .dark .lead { color: var(--on-dark-muted); }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 30px; font: 600 15px/1 var(--font); text-decoration: none; border: 2px solid transparent; border-radius: 999px; transition: background .2s, color .2s, border-color .2s; }
 .btn svg { width: 18px; height: 18px; flex: none; }
-.btn--red { background: var(--red); color: #fff; }
-.btn--red:hover { background: var(--red-dark); }
-.btn--white { background: #fff; color: var(--ink); }
-.btn--white:hover { background: var(--ink); color: #fff; }
-.btn--ghost { border-color: rgba(255,255,255,.65); color: #fff; }
+.btn--red { background: var(--red); border-color: var(--red); color: #fff; }
+.btn--red:hover { background: var(--red-dark); border-color: var(--red-dark); }
+.btn--white { background: #fff; border-color: #fff; color: var(--ink); }
+.btn--white:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn--ghost { border-color: #fff; color: #fff; }
 .btn--ghost:hover { background: #fff; color: var(--ink); }
 .btn--line { border-color: var(--ink); color: var(--ink); }
 .btn--line:hover { background: var(--ink); color: #fff; }
@@ -101,7 +101,7 @@ p { margin: 0; }
 .hero .lead { color: rgba(255,255,255,.86); max-width: 540px; font-size: 18px; }
 .chips { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .chips li { display: inline-flex; align-items: center; gap: 9px; padding: 9px 18px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); font-size: 15px; font-weight: 700; backdrop-filter: blur(6px); }
-.chips svg { width: 18px; height: 18px; color: var(--red-light); }
+.chips svg { width: 18px; height: 18px; color: var(--red); }
 .prices { position: relative; z-index: 2; margin-top: -86px; }
 .prices-card { display: grid; grid-template-columns: 1.1fr repeat(4, 1fr); background: #fff; border-radius: var(--r); box-shadow: 0 30px 60px -30px rgba(14,15,17,.45); overflow: hidden; }
 .prices-head { background: var(--red); color: #fff; padding: 26px 30px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
@@ -136,13 +136,13 @@ p { margin: 0; }
 .step-link { margin-top: 20px; font-size: 15px; color: var(--text); }
 /* Startstück mit Punkt 1 */
 .start { position: relative; height: 90px; }
-.start i { position: absolute; top: 25px; bottom: 0; left: calc(100% - (100% - 80px) / 4 - 3px); width: 6px; background: var(--ink); }
+.start i { position: absolute; top: 25px; bottom: 0; left: calc(100% - (100% - 80px) / 4 - 2.5px); width: 5px; background: var(--ink); }
 .start .num { top: 0; left: calc(100% - (100% - 80px) / 4 - 25px); }
 /* Verbindung rechts → links (Balken mit Punkt) */
 .conn { position: relative; height: 140px; }
 .conn .a, .conn .b { position: absolute; border: 0 solid var(--ink); }
-.conn .a { top: 0; height: 73px; left: calc((100% - 80px) / 4 + 40px); right: calc((100% - 80px) / 4 - 3px); border-right-width: 6px; border-bottom-width: 6px; border-bottom-right-radius: 40px; }
-.conn .b { top: 67px; bottom: 0; left: calc((100% - 80px) / 4 - 3px); width: 46px; border-left-width: 6px; border-top-width: 6px; border-top-left-radius: 40px; }
+.conn .a { top: 0; height: 73px; left: calc((100% - 80px) / 4 + 40px); right: calc((100% - 80px) / 4 - 2.5px); border-right-width: 5px; border-bottom-width: 5px; border-bottom-right-radius: 40px; }
+.conn .b { top: 68px; bottom: 0; left: calc((100% - 80px) / 4 - 2.5px); width: 46px; border-left-width: 5px; border-top-width: 5px; border-top-left-radius: 40px; }
 .conn .num { top: 45px; left: calc(50% - 25px); }
 .step-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; }
 .step-small .step-img { aspect-ratio: 16 / 10; overflow: visible; }
@@ -150,7 +150,7 @@ p { margin: 0; }
 .step-small .step-img.corner-tr img { border-radius: 0 var(--corner) 0 0; }
 .step-small .step-img.corner-tl img { border-radius: var(--corner) 0 0 0; }
 /* Verbindung 2 → 3 nebeneinander */
-.link { position: absolute; top: 50%; right: -80px; width: 80px; height: 6px; margin-top: -3px; background: var(--ink); z-index: 1; }
+.link { position: absolute; top: 50%; right: -80px; width: 80px; height: 5px; margin-top: -2.5px; background: var(--ink); z-index: 1; }
 .link .num { top: -22px; left: 15px; }
 .step-big--rev .step-img { order: -1; }
 .conn-m { display: none; }
@@ -159,7 +159,7 @@ p { margin: 0; }
   .step-big .step-img, .step-big--rev .step-img { order: -1; margin-bottom: 28px; }
   .start, .conn, .link { display: none; }
   .conn-m { display: block; position: relative; height: 90px; }
-  .conn-m::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; margin-left: -3px; background: var(--ink); }
+  .conn-m::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 5px; margin-left: -2.5px; background: var(--ink); }
   .conn-m .num { top: 20px; left: calc(50% - 25px); }
   .step-small .step-title { margin-top: 24px; }
 }
@@ -212,9 +212,17 @@ p { margin: 0; }
 
 /* ---------- 5 · Bezahlen & Service ---------- */
 .pay { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 80px; align-items: center; }
-.pay-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-.pay-chips span { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 20px; background: #fff; border: 1px solid var(--line); border-radius: 12px; font-weight: 700; font-size: 15px; }
-.pay-chips i { width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+.pay-logos { list-style: none; margin: 34px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.pay-logos li { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 4px 10px; text-align: center; font-size: 13px; font-weight: 600; color: var(--text); }
+.pay-logos li + li { border-left: 1px solid var(--line); }
+.pay-logos .lg { height: 56px; display: grid; place-items: center; }
+.pay-logos img { max-height: 56px; width: auto; }
+.pay-logos img.visa { max-height: 24px; }
+.pay-logos img.mc { max-height: 42px; }
+.mini-card { position: relative; width: 66px; height: 42px; border-radius: 6px; background: var(--ink); }
+.mini-card::before { content: ""; position: absolute; left: 8px; top: 9px; width: 30px; height: 4px; background: #fff; }
+.mini-card::after { content: ""; position: absolute; left: 14px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+@media (max-width: 520px) { .pay-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 22px; } .pay-logos li:nth-child(3) { border-left: 0; } }
 .pay-note { margin-top: 20px; font-size: 15px; font-style: italic; color: var(--text); }
 .tiles { display: grid; gap: 14px; }
 .tile { display: grid; grid-template-columns: 60px 1fr 28px; gap: 20px; align-items: center; padding: 24px 26px; background: #fff; border: 1px solid var(--line); border-radius: 16px; text-decoration: none; transition: border-color .2s, transform .2s, box-shadow .2s; }
@@ -243,7 +251,9 @@ p { margin: 0; }
 @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; gap: 44px; } .faq-side { position: static; } .faq details p { padding-right: 0; } }
 
 /* ---------- 7 · Tankkarte über der Karte + Kontakt ---------- */
-.map-area { position: relative; background: #dedede url("img/karte-grau.jpg") 68% 50% / cover no-repeat; padding-bottom: 90px; }
+.map-area { position: relative; background: #ebebeb; padding-bottom: 90px; overflow: hidden; }
+.map-bg { position: absolute; width: 1300px; height: 615px; left: calc(36% - 650px); top: calc(58% - 295px); background: url("img/karte-grau.jpg") center / 100% 100% no-repeat; -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); }
+.map-area .container { position: relative; }
 .banner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-top: -150px; background: var(--red); color: #fff; border-radius: 0 70px 0 0; overflow: hidden; box-shadow: 0 40px 70px -35px rgba(14,15,17,.6); }
 .banner-visual { position: relative; background: var(--ink); min-height: 360px; display: grid; place-items: center; perspective: 1300px; overflow: hidden; }
 .banner-visual::before { content: ""; position: absolute; left: -10%; right: -10%; top: 60%; height: 14%; background: var(--red); transform: rotate(-7deg); }
@@ -266,7 +276,18 @@ p { margin: 0; }
 .banner-text .kicker { color: #fff; }
 .banner-text .kicker::before { background: #fff; }
 .banner-text p { margin-top: 16px; color: rgba(255,255,255,.92); }
-.contact-card { position: relative; z-index: 1; width: 100%; max-width: 410px; margin: 70px 0 0 auto; background: #fff; border-radius: 0 var(--corner) 0 0; padding: 36px 36px 32px; box-shadow: 0 30px 60px -25px rgba(14,15,17,.45); }
+.ask { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.3); }
+.ask b { display: block; font-size: 17px; font-weight: 700; line-height: 1.45; }
+.ask-row { display: flex; flex-wrap: wrap; gap: 14px 30px; margin-top: 18px; }
+.ask-item { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; font-size: 16px; line-height: 1.3; }
+.ask-item i { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #fff; color: var(--red); flex: none; }
+.ask-item svg { width: 20px; height: 20px; }
+.ask-item small { display: block; font-size: 12px; font-weight: 500; opacity: .85; }
+.ask-item:hover span { text-decoration: underline; }
+.contact-card { position: relative; z-index: 1; width: 100%; max-width: 430px; margin: 70px 0 0 auto; background: #fff; border-radius: 0 var(--corner) 0 0; overflow: hidden; box-shadow: 0 30px 60px -25px rgba(14,15,17,.45); }
+.cc-img { aspect-ratio: 1000 / 638; }
+.cc-img img { width: 100%; height: 100%; object-fit: cover; }
+.cc-body { padding: 32px 36px 34px; }
 .contact-card .h2 { font-size: 30px; }
 .contact { list-style: none; margin: 22px 0 0; padding: 0; }
 .contact li { padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -274,11 +295,13 @@ p { margin: 0; }
 .contact span { font-weight: 700; }
 .map-pin-label { position: absolute; left: 0; bottom: 14px; font-size: 12px; color: #555; }
 @media (max-width: 860px) {
-  .map-area { background-image: none; background-color: var(--alt); padding-bottom: 0; }
+  .map-area { background-color: var(--alt); padding-bottom: 0; }
+  .map-bg { display: none; }
   .banner { grid-template-columns: 1fr; border-radius: 0 44px 0 0; margin-top: -60px; }
   .banner-text { padding: 40px 28px 44px; }
-  .map-img { display: block; height: 300px; margin-top: 40px; background: url("img/karte-grau.jpg") 50% 48% / cover no-repeat; }
-  .contact-card { margin: 0; max-width: none; border-radius: 0; box-shadow: none; padding: 36px 0 60px; background: transparent; }
+  .map-img { display: block; height: 300px; margin-top: 40px; background: url("img/karte-grau.jpg") 50% 48% / auto 100% no-repeat; }
+  .contact-card { margin: 0 0 60px; max-width: none; border-radius: 0 28px 0 0; box-shadow: none; }
+  .cc-body { padding: 28px 24px 30px; }
 }
 @media (min-width: 861px) { .map-img { display: none; } }
 
@@ -311,6 +334,8 @@ p { margin: 0; }
   <symbol id="i-receipt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h3"/></g></symbol>
   <symbol id="i-gift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13M12 8S10 3 7.5 4 9 8 12 8zM12 8s2-5 4.5-4S15 8 12 8z"/></g></symbol>
   <symbol id="i-help" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2"/></g></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></g></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></g></symbol>
 </svg>
 
@@ -465,12 +490,17 @@ p { margin: 0; }
       <h2 class="h2">Einfach bargeldlos bezahlen.</h2>
       <p class="lead">An unserem Tankautomaten stehen Ihnen verschiedene bargeldlose Zahlungsmöglichkeiten zur Verfügung.</p>
       <!-- Platzhalter: durch Logos der tatsächlich akzeptierten Karten ersetzen -->
-      <div class="pay-chips"><span>girocard</span><span>Mastercard</span><span>Visa</span><span><i></i>Freise Tankkarte</span></div>
+      <ul class="pay-logos">
+        <li><span class="lg"><img src="img/pay-girocard.png" alt=""></span>girocard</li>
+        <li><span class="lg"><img class="mc" src="img/pay-mastercard.png" alt=""></span>Mastercard</li>
+        <li><span class="lg"><img class="visa" src="img/pay-visa.png" alt=""></span>Visa</li>
+        <li><span class="lg"><span class="mini-card"></span></span>Freise Tankkarte</li>
+      </ul>
       <p class="pay-note">Bitte beachten Sie, dass es bei Kartenzahlungen zu einer vorübergehenden <a href="#vorautorisierung">Vorautorisierung</a> kommen kann.</p>
     </div>
     <div class="tiles">
       <a class="tile" href="#bezahlen"><span class="tile-ico"><svg><use href="#i-receipt"/></svg></span><div><h3>Tankbeleg anfordern</h3><p>Beleg verloren oder nicht erhalten? Hier digital nachfordern.</p></div><svg><use href="#i-arrow"/></svg></a>
-      <a class="tile" href="#tankkarte"><span class="tile-ico"><svg><use href="#i-gift"/></svg></span><div><h3>Gutscheinkarten</h3><p>Tankgutscheine zum Verschenken – für Mitarbeiter, Kunden oder Familie.</p></div><svg><use href="#i-arrow"/></svg></a>
+      <a class="tile" href="#tankkarte"><span class="tile-ico"><svg><use href="#i-gift"/></svg></span><div><h3>Gutscheinkarten</h3><p>Tankgutscheine zum Verschenken – erhältlich direkt bei uns. Sprechen Sie uns an.</p></div><svg><use href="#i-arrow"/></svg></a>
       <a class="tile" href="#kontakt"><span class="tile-ico"><svg><use href="#i-help"/></svg></span><div><h3>Hilfe bei Problemen</h3><p>Karte abgelehnt, Zapfsäule gibt nicht frei? So erreichen Sie uns.</p></div><svg><use href="#i-arrow"/></svg></a>
     </div>
   </div>
@@ -504,6 +534,7 @@ p { margin: 0; }
 
 <!-- 7 · TANKKARTE + STANDORT (über der Karte in Graustufen) -->
 <section class="map-area" id="kontakt">
+  <div class="map-bg" role="img" aria-label="Karte: Tankstelle Freise an der Kirchberger Straße in Münchehof"></div>
   <div class="container">
     <div class="banner" id="tankkarte">
       <div class="banner-visual" aria-hidden="true">
@@ -523,15 +554,20 @@ p { margin: 0; }
         <span class="kicker">Sind Sie öfter hier?</span>
         <h2 class="h2">Tankkarte und Zahlung auf Rechnung.</h2>
         <!-- Platzhaltertext: Konditionen vom Kunden bestätigen lassen -->
-        <p>Für Betriebe, Landwirte und alle, die regelmäßig bei uns tanken. Beantragen Sie Ihre Freise Tankkarte bequem online.</p>
-        <div class="btns">
-          <a class="btn btn--white" href="#tankkarte">Tankkarte beantragen</a>
-          <a class="btn btn--ghost" href="#bezahlen">Gutscheinkarten</a>
+        <p>Für Betriebe, Landwirte und alle, die regelmäßig bei uns tanken. Auch Gutscheinkarten zum Verschenken erhalten Sie direkt bei uns.</p>
+        <div class="ask">
+          <b>Interessiert an einer Tankkarte oder Gutscheinkarte? Sprechen Sie uns an.</b>
+          <div class="ask-row">
+            <a class="ask-item" href="tel:+4953818511"><i><svg><use href="#i-phone"/></svg></i><span><small>Anrufen</small>05381 8511</span></a>
+            <a class="ask-item" href="mailto:info@freise-seesen.de"><i><svg><use href="#i-mail"/></svg></i><span><small>E-Mail</small>info@freise-seesen.de</span></a>
+          </div>
         </div>
       </div>
     </div>
     <div class="map-img" role="img" aria-label="Karte: Tankstelle Freise an der Kirchberger Straße in Münchehof"></div>
     <div class="contact-card">
+      <div class="cc-img"><img src="img/tankstelle.jpg" alt="Die Freise Automatentankstelle an der Kirchberger Straße"></div>
+      <div class="cc-body">
       <span class="kicker">Standort &amp; Kontakt</span>
       <h2 class="h2">Einfach vorbeikommen und tanken.</h2>
       <ul class="contact">
@@ -541,6 +577,7 @@ p { margin: 0; }
         <li><small>E-Mail</small><span>info@freise-seesen.de</span></li>
       </ul>
       <div class="btns" style="margin-top:24px"><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
+      </div>
     </div>
   </div>
 </section>
@@ -549,12 +586,12 @@ p { margin: 0; }
 <footer class="footer">
   <div class="rule" aria-hidden="true"></div>
   <div class="container footer-main">
-    <div><a class="flogo" href="#top" aria-label="Freise Seesen"><svg viewBox="0 0 325.882 61.1765" aria-hidden="true"><use href="#logo"/></svg></a><p>Automatentankstelle in Münchehof.<br>Betrieben durch die handelpro GmbH.</p></div>
+    <div><a class="flogo" href="#top" aria-label="Freise Seesen"><svg viewBox="0 0 325.882 61.1765" aria-hidden="true"><use href="#logo"/></svg></a><p>Automatentankstelle in Seesen-Münchehof.<br>24 Stunden geöffnet, 7 Tage die Woche.</p></div>
     <div><h4>Tankstelle</h4><ul><li><a href="#preise">Aktuelle Preise</a></li><li><a href="#ablauf">So funktioniert's</a></li><li><a href="#kraftstoffe">Kraftstoffe</a></li><li><a href="#faq">FAQ</a></li></ul></div>
     <div><h4>Service</h4><ul><li><a href="#tankkarte">Tankkarte</a></li><li><a href="#bezahlen">Gutscheinkarten</a></li><li><a href="#bezahlen">Tankbeleg anfordern</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
     <div><h4>Kontakt</h4><ul><li>Kirchberger Str. 16<br>38723 Seesen-Münchehof</li><li>05381 8511</li><li>info@freise-seesen.de</li></ul></div>
   </div>
-  <div class="socket"><div class="container"><span>© 2026 handelpro GmbH</span><span><a href="#top">Impressum</a> · <a href="#top">Datenschutz</a></span></div></div>
+  <div class="socket"><div class="container"><span>© 2026 Freise Automatentankstelle</span><span><a href="#top">Impressum</a> · <a href="#top">Datenschutz</a></span></div></div>
 </footer>
 
 <script>
