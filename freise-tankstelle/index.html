@@ -2,257 +2,297 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout nach dem Aufbau des Charg-Themes (Kundenwunsch): Foto-Hero mit überlappender Karte,
-   versetzte Bilder mit einer runden Ecke, Zickzack-Blöcke mit Verbindungslinie, Bildkarten,
-   Banner über der Abschnittsgrenze. Logo-Motiv: Balken mit mittig aufsitzendem Punkt (Ø = 2,6 × Balkenhöhe). */
+/* Onepager Freise Automatentankstelle.
+   Ablauf: Hero (Foto + Preisleiste) → Schritte (Bilder + Linie mit nummerierten Punkten) → Kraftstoffe
+   → Vorautorisierung (dunkel, animierte Balken) → Bezahlen & Service → FAQ → Tankkarte über der Karte → Footer.
+   Logo-Motiv: schwarzer Balken + roter Punkt (Schritt-Linie), roter Punkt vor jeder Überzeile. */
 :root {
   --ink: #0e0f11;
-  --ink-2: #191b1f;
-  --ink-3: #26292e;
+  --ink-2: #1b1d21;
+  --ink-3: #2a2d32;
   --red: #ce1729;
   --red-dark: #a50f1f;
   --red-light: #ff4d5e;
   --paper: #ffffff;
-  --alt: #f5f4f4;
-  --line: #e7e4e4;
-  --text: #5d5a5b;
-  --on-dark: #ffffff;
-  --on-dark-muted: #a7a5a6;
+  --alt: #f3f2f2;
+  --line: #e4e1e1;
+  --text: #5b5859;
+  --on-dark-muted: #a9a6a7;
   --font: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r: 22px;
   --corner: 40px;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.75 var(--font); -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--font); -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
-h1, h2, h3 { margin: 0; line-height: 1.25; text-wrap: balance; font-weight: 600; }
+h1, h2, h3 { margin: 0; line-height: 1.12; text-wrap: balance; font-weight: 800; letter-spacing: -0.02em; }
 p { margin: 0; }
 :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
 
-.container { max-width: 1140px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.container { max-width: 1180px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
 .section { padding-block: 110px; }
-.dark { background: var(--ink); color: var(--on-dark); }
+.alt { background: var(--alt); }
+.dark { background: var(--ink); color: #fff; }
 @media (max-width: 760px) { .section { padding-block: 72px; } }
 
-/* Überzeile mit Logo-Motiv: Balken + mittig aufsitzender Punkt */
-.kicker { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--red); }
-.kicker::before { content: ""; flex: none; width: 46px; height: 13px;
-  background: radial-gradient(circle at 13px 50%, var(--red) 6.5px, transparent 7px),
-              linear-gradient(var(--bar, var(--ink)), var(--bar, var(--ink))) 0 50% / 100% 5px no-repeat; }
-.dark .kicker, .hero .kicker { --bar: #fff; color: var(--red-light); }
-.h2 { font-size: clamp(28px, 3.3vw, 38px); }
-.lead { color: var(--text); }
+/* Überzeile: roter Punkt + Versalien */
+.kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--red); }
+.kicker::before { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--red); flex: none; }
+.dark .kicker, .hero .kicker { color: var(--red-light); }
+.dark .kicker::before, .hero .kicker::before { background: var(--red-light); }
+.h2 { font-size: clamp(32px, 4vw, 48px); }
+.lead { margin-top: 18px; font-size: 17px; color: var(--text); max-width: 62ch; }
 .dark .lead { color: var(--on-dark-muted); }
-.center { text-align: center; margin-inline: auto; }
 
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 26px; font: 600 14px/1 var(--font); text-decoration: none; border: 1.5px solid transparent; border-radius: 4px; transition: background .2s, color .2s, border-color .2s; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 30px; font: 600 15px/1 var(--font); text-decoration: none; border: 2px solid transparent; border-radius: 999px; transition: background .2s, color .2s, border-color .2s; }
+.btn svg { width: 18px; height: 18px; flex: none; }
 .btn--red { background: var(--red); color: #fff; }
 .btn--red:hover { background: var(--red-dark); }
 .btn--white { background: #fff; color: var(--ink); }
-.btn--white:hover { background: var(--red); color: #fff; }
-.btn--dark { background: var(--ink); color: #fff; }
-.btn--dark:hover { background: var(--red); }
-.btn--outline { border-color: var(--red); color: var(--ink); }
-.btn--outline:hover { background: var(--red); color: #fff; }
-.dark .btn--outline { color: #fff; }
-.btn--more { border-color: #cfcaca; color: var(--ink); min-height: 42px; padding: 0 16px 0 18px; }
-.btn--more::after { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 12h10M13 7l5 5-5 5'/%3E%3C/svg%3E") center / 11px no-repeat; transition: background-color .2s; }
-.btn--more:hover { border-color: var(--red); }
-.btn--more:hover::after { background-color: var(--red); }
-.btns { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+.btn--white:hover { background: var(--ink); color: #fff; }
+.btn--ghost { border-color: rgba(255,255,255,.65); color: #fff; }
+.btn--ghost:hover { background: #fff; color: var(--ink); }
+.btn--line { border-color: var(--ink); color: var(--ink); }
+.btn--line:hover { background: var(--ink); color: #fff; }
+.btns { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
 
-.checks { list-style: none; margin: 22px 0 0; padding: 0; }
-.checks li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 500; color: var(--ink); }
-.checks li::before { content: ""; flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4L18 8'/%3E%3C/svg%3E") center / 12px no-repeat; }
-.checks small { margin-left: auto; color: var(--text); font-weight: 400; font-size: 13px; text-align: right; }
-
-/* ---------- Header (dunkel wie bei Charg) ---------- */
-.topbar { background: #000; color: var(--on-dark-muted); font-size: 12.5px; }
+/* ---------- Header ---------- */
+.topbar { background: #000; color: var(--on-dark-muted); font-size: 13px; }
 .topbar .container { display: flex; justify-content: space-between; gap: 16px; padding-block: 8px; }
 .topbar b { color: #fff; font-weight: 600; }
-.live { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22b35e; margin-right: 8px; vertical-align: 1px; animation: pulse 2.4s infinite; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,179,94,.55); } 70% { box-shadow: 0 0 0 7px rgba(34,179,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,179,94,0); } }
+.live { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22b35e; margin-right: 8px; vertical-align: 1px; animation: pulse 2.4s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,179,94,.55); } 70% { box-shadow: 0 0 0 8px rgba(34,179,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,179,94,0); } }
 .header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--ink); border-bottom: 1px solid rgba(255,255,255,.08); }
-.header .container { display: flex; align-items: stretch; gap: 30px; min-height: 80px; }
-.logo { display: flex; align-items: center; width: 190px; color: #fff; flex: none; }
+.header .container { display: flex; align-items: stretch; gap: 28px; min-height: 82px; }
+.logo { display: flex; align-items: center; width: 180px; color: #fff; flex: none; }
 .logo svg { width: 100%; height: auto; }
-.menu { display: flex; align-items: stretch; margin-left: auto; font-size: 14px; font-weight: 600; color: #fff; }
-.menu a { display: flex; align-items: center; padding: 0 16px; text-decoration: none; border-top: 3px solid transparent; }
+.menu { display: flex; align-items: stretch; margin-left: auto; font-size: 14px; font-weight: 600; color: #fff; white-space: nowrap; }
+.menu a { display: flex; align-items: center; padding: 0 13px; text-decoration: none; border-top: 3px solid transparent; }
 .menu a:hover { color: var(--red-light); }
-.menu a.active { border-top-color: var(--red); background: rgba(255,255,255,.06); color: var(--red-light); }
+.menu a.active { border-top-color: var(--red); background: rgba(255,255,255,.06); }
 .header .cta { display: flex; align-items: center; }
-.header .cta .btn { min-height: 44px; padding: 0 20px; }
-.burger { display: none; align-self: center; margin-left: auto; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.3); border-radius: 4px; background: transparent; color: #fff; cursor: pointer; }
+.header .cta .btn { min-height: 46px; padding: 0 22px; white-space: nowrap; }
+.burger { display: none; align-self: center; margin-left: auto; width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
 .burger svg { width: 22px; height: 22px; }
-@media (max-width: 1080px) {
+@media (max-width: 1100px) {
   .menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--ink); padding: 8px max(20px, env(safe-area-inset-right, 0px)) 18px max(20px, env(safe-area-inset-left, 0px)); }
   .menu.open { display: flex; }
   .menu a { padding: 13px 0; border-top: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .menu a.active { background: none; }
+  .menu a.active { background: none; color: var(--red-light); }
   .burger { display: block; }
   .header .cta { display: none; }
   .logo { width: 160px; }
 }
 @media (max-width: 560px) { .topbar .hide-s { display: none; } }
 
-/* ---------- Hero ---------- */
-.hero { position: relative; background: var(--ink) url("img/hero-zapfpistole.jpg") 60% center / cover no-repeat; color: #fff; }
-.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,15,17,.88) 0%, rgba(14,15,17,.7) 45%, rgba(14,15,17,.2) 100%); }
-.hero .container { position: relative; padding-block: 150px 190px; }
-.hero h1 { font-size: clamp(38px, 5vw, 60px); max-width: 620px; letter-spacing: -0.01em; }
-.hero h1 span { color: var(--red-light); }
-.hero p.lead { margin-top: 18px; max-width: 520px; color: rgba(255,255,255,.88); font-size: 16px; }
-/* Überlappende Karte mit Preisen (eine runde Ecke) */
-.price-card { position: absolute; right: max(20px, env(safe-area-inset-right, 0px)); bottom: -70px; width: 380px; max-width: calc(100% - 40px); background: #fff; color: var(--ink); border-radius: var(--corner) 0 0 0; padding: 28px 30px 22px; box-shadow: 0 30px 60px -25px rgba(14,15,17,.45); z-index: 3; }
-.price-card h2 { font-size: 16px; display: flex; justify-content: space-between; align-items: baseline; }
-.price-card h2 small { font-size: 12px; font-weight: 500; color: var(--text); }
-.price-list { list-style: none; margin: 10px 0 0; padding: 0; }
-.price-list li { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); }
-.price-list li:last-child { border-bottom: 0; }
-.price-list span { font-weight: 500; font-size: 14px; }
-.price { font-size: 26px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
-.price sup { font-size: .5em; vertical-align: .8em; color: var(--red); }
-.price-note { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--text); }
-.price-note::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
-@media (max-width: 900px) { .hero .container { padding-block: 90px 60px; } .price-card { position: relative; right: auto; bottom: auto; margin-top: 44px; max-width: 100%; } }
+/* ---------- 1 · Hero + Preisleiste ---------- */
+.hero { position: relative; background: var(--ink) url("img/hero-zapfpistole.jpg") 62% center / cover no-repeat; color: #fff; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,15,17,.95) 0%, rgba(14,15,17,.8) 40%, rgba(14,15,17,.25) 75%, rgba(14,15,17,.15) 100%); }
+.hero .container { position: relative; padding-block: 120px 160px; }
+.hero h1 { font-size: clamp(42px, 6vw, 76px); letter-spacing: -0.035em; }
+.hero h1 span { display: block; color: var(--red); }
+@media (min-width: 700px) { .hero h1 span { white-space: nowrap; } }
+.hero .lead { color: rgba(255,255,255,.86); max-width: 540px; font-size: 18px; }
+.chips { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.chips li { display: inline-flex; align-items: center; gap: 9px; padding: 9px 18px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); font-size: 15px; font-weight: 700; backdrop-filter: blur(6px); }
+.chips svg { width: 18px; height: 18px; color: var(--red-light); }
+.prices { position: relative; z-index: 2; margin-top: -86px; }
+.prices-card { display: grid; grid-template-columns: 1.1fr repeat(4, 1fr); background: #fff; border-radius: var(--r); box-shadow: 0 30px 60px -30px rgba(14,15,17,.45); overflow: hidden; }
+.prices-head { background: var(--red); color: #fff; padding: 26px 30px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.prices-head b { font-size: 21px; font-weight: 800; line-height: 1.25; }
+.prices-head span { font-size: 14px; font-weight: 500; opacity: .92; }
+.price-cell { padding: 26px 30px; border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; }
+.price-cell:nth-child(2) { border-left: 0; }
+.price-name { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
+.price { font-size: 44px; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.price sup { font-size: .48em; vertical-align: .8em; color: var(--red); margin-left: 1px; }
+.price small { font-size: 14px; font-weight: 500; color: var(--text); letter-spacing: 0; margin-left: 4px; }
+@media (max-width: 980px) { .prices-card { grid-template-columns: repeat(2, 1fr); } .prices-head { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; padding: 18px 24px; } .price-cell { border-left: 0; border-top: 1px solid var(--line); } .price-cell:nth-child(odd) { border-left: 1px solid var(--line); } }
+@media (max-width: 460px) { .price { font-size: 34px; } .price-cell { padding: 18px 20px; } .prices-head { flex-direction: column; align-items: flex-start; } }
 
-/* ---------- Intro / Kraftstoffe ---------- */
-.intro { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 70px; align-items: end; }
-.intro-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: end; margin-top: 44px; }
-.img-a { position: relative; aspect-ratio: 3 / 4; background: var(--alt); }
-.img-a img { width: 100%; height: 100%; object-fit: cover; }
-.stat { position: absolute; right: 0; bottom: 0; width: 64%; padding: 24px 22px; background: var(--red); color: #fff; }
-.stat b { display: block; font-size: 38px; font-weight: 600; line-height: 1.1; }
-.stat span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; }
-.img-b { aspect-ratio: 3 / 4; border-radius: 0 var(--corner) 0 0; overflow: hidden; margin-bottom: 22px; background: var(--alt); }
-.img-b img { width: 100%; height: 100%; object-fit: cover; }
-.intro-text .strong { color: var(--ink); font-weight: 600; }
-.intro-text .lead { margin-top: 16px; }
-@media (max-width: 900px) { .intro { grid-template-columns: 1fr; gap: 40px; } }
-@media (max-width: 560px) { .intro-imgs { gap: 12px; } .stat { width: 88%; padding: 14px 14px; } .stat b { font-size: 26px; } .stat span { font-size: 12px; } }
+/* ---------- 2 · Schritte: Bilder + Linie mit nummerierten Punkten ---------- */
+.steps-head { max-width: 720px; margin-bottom: 30px; }
+.num { position: absolute; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: var(--red); color: #fff; font-weight: 800; font-size: 19px; box-shadow: 0 0 0 6px #fff; z-index: 2; }
+.step-big { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; align-items: end; }
+.step-img { position: relative; overflow: hidden; background: var(--alt); }
+.step-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.step-img:hover img { transform: scale(1.04); }
+.step-big .step-img { aspect-ratio: 1 / .9; }
+.step-big > div:not(.step-img) { align-self: center; }
+.corner-tl { border-radius: var(--corner) 0 0 0; }
+.corner-tr { border-radius: 0 var(--corner) 0 0; }
+.step-title { font-size: clamp(26px, 2.8vw, 34px); }
+.step-small .step-title { font-size: 24px; margin-top: 26px; }
+.step-text { margin-top: 14px; color: var(--text); }
+.step-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 22px; padding: 16px 18px; border-radius: 14px; background: var(--alt); font-size: 15px; color: var(--text); }
+.step-note::before { content: "!"; flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; font-size: 13px; margin-top: 1px; }
+.step-note a, .step-link a { color: var(--ink); font-weight: 700; }
+.step-link { margin-top: 20px; font-size: 15px; color: var(--text); }
+/* Startstück mit Punkt 1 */
+.start { position: relative; height: 90px; }
+.start i { position: absolute; top: 25px; bottom: 0; left: calc(100% - (100% - 80px) / 4 - 3px); width: 6px; background: var(--ink); }
+.start .num { top: 0; left: calc(100% - (100% - 80px) / 4 - 25px); }
+/* Verbindung rechts → links (Balken mit Punkt) */
+.conn { position: relative; height: 140px; }
+.conn .a, .conn .b { position: absolute; border: 0 solid var(--ink); }
+.conn .a { top: 0; height: 73px; left: calc((100% - 80px) / 4 + 40px); right: calc((100% - 80px) / 4 - 3px); border-right-width: 6px; border-bottom-width: 6px; border-bottom-right-radius: 40px; }
+.conn .b { top: 67px; bottom: 0; left: calc((100% - 80px) / 4 - 3px); width: 46px; border-left-width: 6px; border-top-width: 6px; border-top-left-radius: 40px; }
+.conn .num { top: 45px; left: calc(50% - 25px); }
+.step-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; }
+.step-small .step-img { aspect-ratio: 16 / 10; overflow: visible; }
+.step-small .step-img img { border-radius: inherit; }
+.step-small .step-img.corner-tr img { border-radius: 0 var(--corner) 0 0; }
+.step-small .step-img.corner-tl img { border-radius: var(--corner) 0 0 0; }
+/* Verbindung 2 → 3 nebeneinander */
+.link { position: absolute; top: 50%; right: -80px; width: 80px; height: 6px; margin-top: -3px; background: var(--ink); z-index: 1; }
+.link .num { top: -22px; left: 15px; }
+.step-big--rev .step-img { order: -1; }
+.conn-m { display: none; }
+@media (max-width: 900px) {
+  .step-big, .step-pair { grid-template-columns: 1fr; gap: 0; }
+  .step-big .step-img, .step-big--rev .step-img { order: -1; margin-bottom: 28px; }
+  .start, .conn, .link { display: none; }
+  .conn-m { display: block; position: relative; height: 90px; }
+  .conn-m::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; margin-left: -3px; background: var(--ink); }
+  .conn-m .num { top: 20px; left: calc(50% - 25px); }
+  .step-small .step-title { margin-top: 24px; }
+}
 
-/* ---------- Zickzack (dunkel) mit Verbindungslinie im Logo-Stil ---------- */
-.zz { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; align-items: center; }
-.zz-img { aspect-ratio: 1 / 1; overflow: hidden; background: var(--ink-3); }
-.zz-img img { width: 100%; height: 100%; object-fit: cover; }
-.zz-img--tl { border-radius: var(--corner) 0 0 0; }
-.zz-img--tr { border-radius: 0 var(--corner) 0 0; }
-.zz h3 { font-size: clamp(24px, 2.6vw, 30px); }
-.zz .lead { margin-top: 16px; }
-.steps { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
-.steps li { display: flex; gap: 14px; align-items: flex-start; color: #fff; font-weight: 500; }
-.steps li::before { counter-increment: s; content: counter(s); flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-top: 1px; }
-.steps li span { display: block; font-weight: 400; font-size: 14px; color: var(--on-dark-muted); }
-.quote { position: relative; margin-top: 28px; padding: 24px 26px; background: var(--ink-3); border-radius: 8px 8px 8px 0; font-size: 16px; font-weight: 500; line-height: 1.6; }
-.quote::before { content: ""; position: absolute; left: 0; bottom: -14px; border-left: 16px solid var(--ink-3); border-bottom: 14px solid transparent; }
-.quote::after { content: "“"; position: absolute; right: 22px; top: -38px; font-size: 80px; font-weight: 700; color: var(--red); line-height: 1; }
-.quote small { display: block; margin-top: 6px; font-size: 13px; font-weight: 400; color: var(--on-dark-muted); }
-/* Verbindungslinie: Balken 6 px, Punkt 16 px mittig darauf = Logo-Proportion */
-.conn { position: relative; height: 130px; }
-.conn .a, .conn .b { position: absolute; border: 0 solid #fff; }
-.conn .a { top: 0; height: 68px; left: calc((100% - 80px) / 4 + 36px); right: calc((100% - 80px) / 4); border-right-width: 6px; border-bottom-width: 6px; border-bottom-right-radius: 36px; }
-.conn .b { top: 62px; bottom: 0; left: calc((100% - 80px) / 4); width: 44px; border-left-width: 6px; border-top-width: 6px; border-top-left-radius: 36px; }
-.conn .dot { position: absolute; top: 57px; left: 50%; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--red); animation: slide 7s ease-in-out infinite alternate; }
-@keyframes slide { from { transform: translateX(-140px); } to { transform: translateX(140px); } }
-.conn--flip { transform: scaleX(-1); }
-.zz-intro { max-width: 640px; margin-bottom: 70px; }
-@media (max-width: 900px) { .zz { grid-template-columns: 1fr; gap: 36px; } .zz .zz-img { order: -1; } .conn { height: 60px; } .conn .a, .conn .b { display: none; } .conn .dot { animation: none; top: 22px; } .conn::before { content: ""; position: absolute; left: 0; right: 0; top: 27px; height: 6px; background: #fff; } .conn--flip { transform: none; } }
+/* ---------- 3 · Kraftstoffe ---------- */
+.fuels-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: end; margin-bottom: 50px; }
+.fuels-head .lead { margin-top: 0; }
+.fuels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+.fuel { background: #fff; border-radius: var(--r); padding: 32px 30px 30px; display: flex; flex-direction: column; transition: background .3s, color .3s, transform .3s; }
+.fuel:hover { background: var(--ink); color: #fff; transform: translateY(-6px); }
+.fuel:hover p { color: var(--on-dark-muted); }
+.fuel:hover .fuel-price { border-color: rgba(255,255,255,.15); }
+.fuel-ico { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--red); color: #fff; }
+.fuel-ico svg { width: 28px; height: 28px; }
+.fuel h3 { margin-top: 26px; font-size: 28px; }
+.fuel p { margin-top: 10px; color: var(--text); font-size: 15px; transition: color .3s; }
+.fuel-price { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; font-weight: 600; }
+.fuel p { margin-bottom: 22px; }
+.fuel-price span { font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.fuel-price sup { font-size: .55em; color: var(--red); }
+@media (max-width: 980px) { .fuels { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fuels-head { grid-template-columns: 1fr; gap: 0; } .fuels-head .lead { margin-top: 18px; } }
+@media (max-width: 520px) { .fuels { grid-template-columns: 1fr; } }
 
-/* Rechenbeispiel */
-.calc { margin-top: 26px; border-top: 1px solid rgba(255,255,255,.12); }
-.calc div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 14px; color: var(--on-dark-muted); }
-.calc b { color: #fff; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.calc .paid b { color: var(--red-light); }
+/* ---------- 4 · Vorautorisierung ---------- */
+.auth { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; align-items: center; }
+.auth .calm { margin-top: 22px; font-size: 20px; font-weight: 700; }
+.auth .lead { font-size: 16px; }
+.auth .lead + .lead { margin-top: 12px; }
+.quote { position: relative; margin-top: 34px; padding: 24px 28px; background: var(--ink-3); border-radius: 14px 14px 14px 0; }
+.quote::before { content: ""; position: absolute; left: 0; bottom: -16px; border-left: 18px solid var(--ink-3); border-bottom: 16px solid transparent; }
+.quote::after { content: ""; position: absolute; right: 24px; top: -20px; width: 40px; height: 32px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Cpath fill='%23ce1729' d='M0 32V18C0 8 5 2 15 0l2 5c-5 2-7 5-7 10h7v17H0zm23 0V18c0-10 5-16 15-18l2 5c-5 2-7 5-7 10h7v17H23z'/%3E%3C/svg%3E") center / contain no-repeat; }
+.quote b { display: block; font-size: 18px; font-weight: 700; line-height: 1.45; }
+.quote span { display: block; margin-top: 6px; font-size: 14px; color: var(--on-dark-muted); }
+.ledger { background: var(--ink-2); border: 1px solid rgba(255,255,255,.08); border-radius: var(--r); padding: 36px; }
+.ledger-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--on-dark-muted); }
+.ledger-head span:last-child { text-transform: none; letter-spacing: 0; font-weight: 500; padding: 3px 12px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; }
+.lrow { margin-top: 30px; }
+.lrow-top { display: flex; justify-content: space-between; gap: 14px; font-size: 17px; }
+.lrow-top small { display: block; font-size: 14px; color: var(--on-dark-muted); }
+.lrow-top b { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lrow.paid b { color: var(--red-light); }
+.bar { position: relative; height: 16px; margin-top: 12px; border-radius: 999px; background: rgba(255,255,255,.07); overflow: hidden; }
+.bar i { position: absolute; top: 0; bottom: 0; border-radius: 999px; transition: width 1.2s cubic-bezier(.2,.7,.2,1); }
+.bar--hold i { left: 0; width: 100%; background: repeating-linear-gradient(135deg, rgba(255,255,255,.32) 0 6px, rgba(255,255,255,.12) 6px 12px); }
+.bar--paid i { left: 0; width: 32.4%; background: var(--red); transition-delay: .7s; }
+.bar--free i { left: 32.4%; width: 67.6%; border: 2px dashed rgba(255,255,255,.5); transition-delay: 1.4s; }
+.ledger.wait .bar i { width: 0; }
+.ledger .btn { margin-top: 34px; }
+@media (max-width: 900px) { .auth { grid-template-columns: 1fr; gap: 50px; } .ledger { padding: 26px; } }
 
-/* CTA mitte */
-.cta-mid { margin-top: 110px; text-align: center; }
-.cta-mid .h2 { max-width: 640px; margin-inline: auto; }
-.cta-mid .lead { max-width: 560px; margin: 14px auto 0; }
-.cta-mid .btns { justify-content: center; }
+/* ---------- 5 · Bezahlen & Service ---------- */
+.pay { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 80px; align-items: center; }
+.pay-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.pay-chips span { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 20px; background: #fff; border: 1px solid var(--line); border-radius: 12px; font-weight: 700; font-size: 15px; }
+.pay-chips i { width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+.pay-note { margin-top: 20px; font-size: 15px; font-style: italic; color: var(--text); }
+.tiles { display: grid; gap: 14px; }
+.tile { display: grid; grid-template-columns: 60px 1fr 28px; gap: 20px; align-items: center; padding: 24px 26px; background: #fff; border: 1px solid var(--line); border-radius: 16px; text-decoration: none; transition: border-color .2s, transform .2s, box-shadow .2s; }
+.tile:hover { border-color: var(--ink); transform: translateX(4px); box-shadow: 0 16px 30px -20px rgba(14,15,17,.4); }
+.tile-ico { display: grid; place-items: center; width: 60px; height: 60px; background: var(--ink); color: #fff; border-radius: 12px; }
+.tile-ico svg { width: 28px; height: 28px; }
+.tile h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+.tile p { margin-top: 3px; font-size: 15px; color: var(--text); }
+.tile > svg { width: 24px; height: 24px; color: var(--red); }
+@media (max-width: 900px) { .pay { grid-template-columns: 1fr; gap: 44px; } .tile { grid-template-columns: 52px 1fr 22px; padding: 20px; gap: 16px; } .tile-ico { width: 52px; height: 52px; } }
 
-/* ---------- Service-Karten ---------- */
-.svc-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: end; margin-bottom: 50px; }
-.call { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
-.call i { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--red); }
-.call i::before { content: ""; width: 34px; height: 34px; border-radius: 50%; background: var(--alt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e0f11' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2'/%3E%3C/svg%3E") center / 16px no-repeat; }
-.call small { display: block; font-size: 12px; color: var(--text); line-height: 1.3; }
-.call b { display: block; font-size: 16px; font-weight: 600; line-height: 1.3; }
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
-.card { position: relative; background: #fff; padding: 22px 22px 30px; box-shadow: 0 18px 50px -22px rgba(14,15,17,.22); overflow: hidden; }
-.card-img { aspect-ratio: 800 / 430; overflow: hidden; border-radius: 0 0 var(--corner) 0; background: var(--alt); }
-.card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-.card:hover .card-img img { transform: scale(1.05); }
-.card h3 { margin: 26px 6px 0; font-size: 18px; }
-.card p { margin: 10px 6px 0; color: var(--text); font-size: 14px; }
-.card .btn { margin: 22px 6px 0; }
-.card svg.mark { position: absolute; right: -10px; bottom: -14px; width: 110px; height: 110px; color: var(--ink); opacity: .05; }
-@media (max-width: 960px) { .cards { grid-template-columns: 1fr 1fr; } .svc-head { grid-template-columns: 1fr; gap: 20px; } }
-@media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+/* ---------- 6 · FAQ ---------- */
+.faq-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 80px; align-items: start; }
+.faq-side { position: sticky; top: 120px; }
+.help { margin-top: 32px; padding: 28px; border-radius: 16px; background: var(--ink); color: #fff; }
+.help b { font-size: 19px; font-weight: 700; }
+.help p { margin-top: 6px; color: var(--on-dark-muted); font-size: 15px; }
+.help .btn { margin-top: 20px; min-height: 48px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq details:first-child { border-top: 4px solid var(--ink); }
+.faq summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; cursor: pointer; list-style: none; font-weight: 700; font-size: 18px; line-height: 1.35; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ""; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e0f11' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center / 15px no-repeat; transition: transform .25s, background-color .25s; }
+.faq details[open] summary::after { transform: rotate(45deg); background-color: var(--red); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E"); }
+.faq details p { padding: 0 60px 26px 0; color: var(--text); }
+@media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; gap: 44px; } .faq-side { position: static; } .faq details p { padding-right: 0; } }
 
-/* ---------- Banner Tankkarte (über der Abschnittsgrenze) ---------- */
-.banner-wrap { background: linear-gradient(var(--paper) 50%, var(--ink) 50%); padding-bottom: 0; }
-.banner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--red); color: #fff; border-radius: 0 70px 0 0; overflow: hidden; }
-.banner-visual { position: relative; background: var(--ink); min-height: 340px; display: grid; place-items: center; perspective: 1300px; overflow: hidden; }
+/* ---------- 7 · Tankkarte über der Karte + Kontakt ---------- */
+.map-area { position: relative; background: #dedede url("img/karte-grau.jpg") 68% 50% / cover no-repeat; padding-bottom: 90px; }
+.banner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-top: -150px; background: var(--red); color: #fff; border-radius: 0 70px 0 0; overflow: hidden; box-shadow: 0 40px 70px -35px rgba(14,15,17,.6); }
+.banner-visual { position: relative; background: var(--ink); min-height: 360px; display: grid; place-items: center; perspective: 1300px; overflow: hidden; }
 .banner-visual::before { content: ""; position: absolute; left: -10%; right: -10%; top: 60%; height: 14%; background: var(--red); transform: rotate(-7deg); }
-.card3d { position: relative; width: 66%; aspect-ratio: 85.6 / 54; transform-style: preserve-3d; animation: flip 9s cubic-bezier(.45,.05,.55,.95) infinite; }
-@keyframes flip { 0%, 18% { transform: rotateX(8deg) rotateY(-16deg); } 50%, 68% { transform: rotateX(8deg) rotateY(164deg); } 100% { transform: rotateX(8deg) rotateY(344deg); } }
+.card3d { position: relative; width: 66%; aspect-ratio: 85.6 / 54; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; animation: flip 10s ease-in-out infinite; }
+/* Seitenwechsel per Deckkraft synchron zur Drehung – zeigt in allen Browsern nie eine gespiegelte Seite */
+@keyframes flip { 0%, 16% { transform: rotateX(8deg) rotateY(-16deg); } 34% { transform: rotateX(8deg) rotateY(90deg); } 50%, 66% { transform: rotateX(8deg) rotateY(164deg); } 84% { transform: rotateX(8deg) rotateY(270deg); } 100% { transform: rotateX(8deg) rotateY(344deg); } }
+@keyframes showFront { 0%, 33.9% { opacity: 1; } 34%, 83.9% { opacity: 0; } 84%, 100% { opacity: 1; } }
+@keyframes showBack { 0%, 33.9% { opacity: 0; } 34%, 83.9% { opacity: 1; } 84%, 100% { opacity: 0; } }
 .face { position: absolute; inset: 0; border-radius: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #1d1f23; color: #fff; padding: 7%; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; box-shadow: 0 30px 50px -20px rgba(0,0,0,.7); border: 1px solid rgba(255,255,255,.08); }
 .face::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.1) 45%, transparent 60%); }
-.front svg { width: 60%; color: #fff; }
-.chip { width: 15%; aspect-ratio: 1.3; border-radius: 5px; background: linear-gradient(135deg, #e3cd84, #a88a3c); }
-.front .row { display: flex; justify-content: space-between; font-size: clamp(9px, 1.1vw, 12px); letter-spacing: .14em; font-weight: 600; }
-.back { transform: rotateY(180deg); padding: 0; justify-content: flex-start; }
-.back .stripe { height: 20%; margin-top: 9%; background: #000; }
-.back p { margin: auto 7% 7%; font-size: clamp(9px, 1.1vw, 12px); line-height: 1.5; color: var(--on-dark-muted); }
+.front { animation: showFront 10s step-end infinite; }
+.back { transform: rotateY(180deg); padding: 0; justify-content: flex-start; animation: showBack 10s step-end infinite; }
+.front svg { width: 60%; color: #fff; position: relative; }
+.chip { width: 15%; aspect-ratio: 1.3; border-radius: 5px; background: linear-gradient(135deg, #e3cd84, #a88a3c); position: relative; }
+.front .row { display: flex; justify-content: space-between; font-size: clamp(9px, 1.1vw, 12px); letter-spacing: .14em; font-weight: 600; position: relative; }
+.back .stripe { height: 20%; margin-top: 9%; background: #000; position: relative; }
+.back p { margin: auto 7% 7%; font-size: clamp(9px, 1.1vw, 12px); line-height: 1.5; color: var(--on-dark-muted); position: relative; }
 .back p b { color: #fff; }
-.banner-text { padding: 56px 56px 60px; }
-.banner-text .over { font-size: 13px; font-weight: 600; opacity: .9; }
-.banner-text .h2 { margin-top: 8px; }
-.banner-text p { margin-top: 14px; color: rgba(255,255,255,.9); }
-.banner-text .btn--outline-w { border-color: rgba(255,255,255,.7); color: #fff; }
-.banner-text .btn--outline-w:hover { background: #fff; color: var(--ink); }
-@media (max-width: 860px) { .banner { grid-template-columns: 1fr; border-radius: 0 44px 0 0; } .banner-text { padding: 40px 28px 44px; } }
-
-/* ---------- FAQ (dunkel) ---------- */
-.faq-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 70px; align-items: start; }
-.faq details { border-bottom: 1px solid rgba(255,255,255,.12); }
-.faq summary { display: flex; align-items: center; gap: 14px; padding: 18px 0; cursor: pointer; list-style: none; font-weight: 500; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::before { content: "?"; flex: none; width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; font-size: 13px; font-weight: 700; transition: background .2s, color .2s; }
-.faq details[open] summary::before { content: "✓"; background: var(--red); color: #fff; }
-.faq details[open] summary { color: var(--red-light); }
-.faq details p { padding: 0 0 20px 38px; color: var(--on-dark-muted); font-size: 14px; }
-@media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; gap: 36px; } }
-
-/* ---------- Karte (Google Maps, Graustufen) ---------- */
-.map { position: relative; min-height: 540px; background: #dcdcdc; }
-.map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(1) contrast(1.05); }
-.map .container { position: relative; display: flex; justify-content: flex-end; padding-block: 70px; pointer-events: none; }
-.map-card { pointer-events: auto; width: 100%; max-width: 400px; background: #fff; border-radius: 0 var(--corner) 0 0; padding: 34px 34px 30px; box-shadow: 0 30px 60px -25px rgba(14,15,17,.4); }
-.map-card .h2 { font-size: 26px; }
-.contact { list-style: none; margin: 20px 0 0; padding: 0; }
-.contact li { padding: 11px 0; border-bottom: 1px solid var(--line); }
-.contact small { display: block; font-size: 12px; color: var(--text); line-height: 1.4; }
-.contact span { font-weight: 600; }
-.tbd { padding: 0 6px; border: 1.5px dashed currentColor; border-radius: 4px; font-weight: 500; opacity: .7; }
-@media (max-width: 700px) { .map { min-height: 0; } .map iframe { position: relative; height: 300px; display: block; } .map .container { padding-block: 40px; } .map-card { box-shadow: none; padding: 0; } }
+.banner-text { padding: 60px 56px 64px; }
+.banner-text .kicker { color: #fff; }
+.banner-text .kicker::before { background: #fff; }
+.banner-text p { margin-top: 16px; color: rgba(255,255,255,.92); }
+.contact-card { position: relative; z-index: 1; width: 100%; max-width: 410px; margin: 70px 0 0 auto; background: #fff; border-radius: 0 var(--corner) 0 0; padding: 36px 36px 32px; box-shadow: 0 30px 60px -25px rgba(14,15,17,.45); }
+.contact-card .h2 { font-size: 30px; }
+.contact { list-style: none; margin: 22px 0 0; padding: 0; }
+.contact li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.contact small { display: block; font-size: 13px; color: var(--text); line-height: 1.4; }
+.contact span { font-weight: 700; }
+.map-pin-label { position: absolute; left: 0; bottom: 14px; font-size: 12px; color: #555; }
+@media (max-width: 860px) {
+  .map-area { background-image: none; background-color: var(--alt); padding-bottom: 0; }
+  .banner { grid-template-columns: 1fr; border-radius: 0 44px 0 0; margin-top: -60px; }
+  .banner-text { padding: 40px 28px 44px; }
+  .map-img { display: block; height: 300px; margin-top: 40px; background: url("img/karte-grau.jpg") 50% 48% / cover no-repeat; }
+  .contact-card { margin: 0; max-width: none; border-radius: 0; box-shadow: none; padding: 36px 0 60px; background: transparent; }
+}
+@media (min-width: 861px) { .map-img { display: none; } }
 
 /* ---------- Footer ---------- */
-.footer { background: var(--ink); color: var(--on-dark-muted); font-size: 14px; }
-.footer-main { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; padding-block: 70px 56px; }
-.footer h4 { margin: 0 0 16px; color: #fff; font-size: 15px; font-weight: 600; }
+.footer { background: var(--ink); color: var(--on-dark-muted); font-size: 15px; }
+.footer-main { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.2fr; gap: 40px; padding-block: 70px 56px; }
+.footer h4 { margin: 0 0 16px; color: #fff; font-size: 16px; font-weight: 700; }
 .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .footer a { text-decoration: none; }
 .footer a:hover { color: #fff; }
-.footer .flogo { display: block; width: 190px; color: #fff; margin-bottom: 18px; }
+.footer .flogo { display: block; width: 200px; color: #fff; margin-bottom: 18px; }
 .socket { border-top: 1px solid rgba(255,255,255,.08); }
 .socket .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-block: 20px; font-size: 13px; }
-.rule { height: 4px; background: var(--red); }
+.footer .rule { height: 6px; background: var(--red); }
 @media (max-width: 860px) { .footer-main { grid-template-columns: 1fr 1fr; } }
 </style>
 
@@ -262,9 +302,16 @@ p { margin: 0; }
 <path fill-rule="evenodd" fill="#ce1729" d="M 82.03 5.37 C 87.28 5.37 91.53 9.63 91.53 14.87 C 91.53 20.12 87.28 24.38 82.03 24.38 C 76.78 24.38 72.53 20.12 72.53 14.87 C 72.53 9.63 76.78 5.37 82.03 5.37"/>
 <path fill-rule="evenodd" fill="currentColor" d="M 256.35 26.48 L 257.40 26.48 L 257.23 27.28 L 261.07 27.28 L 262.82 18.33 L 265.70 26.48 L 266.30 26.48 L 266.58 27.28 L 270.65 27.28 L 273.83 12.04 L 272.78 12.04 L 272.95 11.25 L 269.11 11.25 L 267.41 20.20 L 264.49 12.04 L 263.89 12.04 L 263.60 11.25 L 259.53 11.25 Z M 239.98 26.48 L 241.03 26.48 L 240.86 27.28 L 253.07 27.28 L 253.79 23.86 L 252.74 23.86 L 252.91 23.07 L 245.70 23.07 L 246.13 20.96 L 253.68 20.96 L 254.32 17.89 L 253.28 17.89 L 253.44 17.10 L 246.93 17.10 L 247.26 15.46 L 255.46 15.46 L 256.18 12.04 L 255.13 12.04 L 255.30 11.25 L 243.14 11.25 Z M 223.99 21.37 C 223.97 23.35 224.73 24.80 226.03 25.71 C 227.11 26.96 228.86 27.60 231 27.60 C 235.46 27.60 237.87 25.32 237.87 22.60 C 237.87 20.94 237.10 19.86 236.06 19.14 C 235.16 18.07 233.73 17.51 232.44 17.16 C 231.61 16.94 231.00 16.78 230.57 16.62 C 230.56 16.54 230.55 16.45 230.55 16.35 C 230.55 15.39 231.57 14.99 232.55 14.99 C 233.00 14.99 233.38 15.04 233.69 15.15 C 233.76 15.34 233.81 15.57 233.81 15.84 L 234.52 15.84 C 234.63 16.05 234.69 16.32 234.69 16.63 L 238.66 16.63 C 238.71 14.71 238.00 13.47 236.86 12.71 C 235.80 11.41 233.94 10.93 231.89 10.93 C 228.83 10.93 225.70 12.41 225.70 15.86 C 225.70 17.32 226.35 18.25 227.33 18.91 C 227.96 19.69 228.92 20.19 230.01 20.58 C 230.93 20.90 232.09 21.09 232.91 21.49 C 232.98 21.65 233.02 21.83 233.02 22.03 C 233.02 22.86 232.35 23.54 230.76 23.54 C 230.06 23.54 229.5 23.47 229.06 23.29 C 228.91 22.99 228.84 22.62 228.84 22.16 L 228.05 22.16 C 227.99 21.93 227.96 21.66 227.96 21.37 Z M 207.28 26.48 L 208.32 26.48 L 208.16 27.28 L 220.37 27.28 L 221.09 23.86 L 220.04 23.86 L 220.21 23.07 L 213 23.07 L 213.43 20.96 L 220.98 20.96 L 221.62 17.89 L 220.58 17.89 L 220.74 17.10 L 214.23 17.10 L 214.56 15.46 L 222.75 15.46 L 223.48 12.04 L 222.43 12.04 L 222.60 11.25 L 210.44 11.25 Z M 190.74 26.48 L 191.78 26.48 L 191.62 27.28 L 203.82 27.28 L 204.55 23.86 L 203.50 23.86 L 203.67 23.07 L 196.45 23.07 L 196.89 20.96 L 204.44 20.96 L 205.08 17.89 L 204.03 17.89 L 204.20 17.10 L 197.69 17.10 L 198.02 15.46 L 206.21 15.46 L 206.94 12.04 L 205.89 12.04 L 206.06 11.25 L 193.89 11.25 Z M 176.79 25.71 C 177.86 26.96 179.62 27.60 181.75 27.60 C 186.21 27.60 188.62 25.32 188.62 22.60 C 188.62 20.94 187.86 19.86 186.82 19.14 C 185.91 18.07 184.49 17.51 183.20 17.16 C 182.37 16.94 181.76 16.78 181.33 16.62 C 181.31 16.54 181.30 16.45 181.30 16.35 C 181.30 15.39 182.33 14.99 183.31 14.99 C 183.76 14.99 184.14 15.04 184.44 15.15 C 184.52 15.34 184.57 15.57 184.57 15.84 L 185.28 15.84 C 185.39 16.05 185.44 16.32 185.44 16.63 L 189.41 16.63 C 189.47 14.71 188.76 13.47 187.62 12.71 C 186.56 11.41 184.70 10.93 182.64 10.93 C 179.59 10.93 176.46 12.41 176.46 15.86 C 176.46 17.32 177.11 18.25 178.08 18.91 C 178.71 19.69 179.68 20.19 180.77 20.58 C 181.69 20.90 182.85 21.09 183.66 21.49 C 183.73 21.65 183.77 21.83 183.77 22.03 C 183.77 22.86 183.11 23.54 181.51 23.54 C 180.82 23.54 180.25 23.47 179.82 23.29 C 179.67 22.99 179.60 22.62 179.60 22.16 L 178.81 22.16 C 178.75 21.93 178.72 21.66 178.72 21.37 L 174.75 21.37 C 174.73 23.35 175.49 24.80 176.79 25.71 M 256.70 26.20 L 259.96 26.20 L 261.90 16.24 L 262.38 16.24 L 265.90 26.20 L 269.54 26.20 L 272.60 11.53 L 269.35 11.53 L 267.44 21.50 L 266.97 21.50 L 263.41 11.53 L 259.76 11.53 Z M 240.33 26.20 L 251.96 26.20 L 252.56 23.35 L 244.30 23.35 L 245.02 19.89 L 252.57 19.89 L 253.09 17.38 L 245.54 17.38 L 246.15 14.38 L 254.34 14.38 L 254.95 11.53 L 243.37 11.53 Z M 224.28 21.65 C 224.37 25.01 226.89 26.52 230.12 26.52 C 231.59 26.52 233.17 26.26 234.46 25.50 C 235.42 24.94 236.18 24.10 236.52 23.02 C 236.64 22.63 236.70 22.23 236.70 21.81 C 236.70 19.14 234.62 18.05 232.37 17.43 C 232.01 17.34 231.66 17.25 231.31 17.15 C 231.04 17.07 230.78 17 230.51 16.90 C 230.15 16.77 229.76 16.59 229.55 16.25 C 229.42 16.03 229.39 15.80 229.39 15.56 C 229.39 15.27 229.46 14.99 229.63 14.75 C 230.07 14.12 230.95 13.91 231.67 13.91 C 232.28 13.91 232.95 14.00 233.44 14.37 C 233.83 14.67 234.02 15.09 234.08 15.55 L 237.5 15.55 C 237.48 14.44 237.17 13.35 236.33 12.56 C 235.19 11.48 233.40 11.21 231.89 11.21 C 229 11.21 225.98 12.57 225.98 15.86 C 225.98 17.96 227.43 18.88 229.23 19.52 C 229.62 19.66 230.04 19.76 230.44 19.87 C 231.31 20.11 232.61 20.42 233.10 21.25 C 233.24 21.49 233.30 21.75 233.30 22.03 C 233.30 22.21 233.27 22.41 233.21 22.58 C 232.85 23.58 231.69 23.82 230.76 23.82 C 229.07 23.82 227.81 23.41 227.69 21.65 Z M 207.63 26.20 L 219.25 26.20 L 219.86 23.35 L 211.60 23.35 L 212.32 19.89 L 219.87 19.89 L 220.39 17.38 L 212.84 17.38 L 213.45 14.38 L 221.64 14.38 L 222.25 11.53 L 210.67 11.53 Z M 191.08 26.20 L 202.71 26.20 L 203.32 23.35 L 195.06 23.35 L 195.78 19.89 L 203.33 19.89 L 203.85 17.38 L 196.30 17.38 L 196.91 14.38 L 205.10 14.38 L 205.71 11.53 L 194.12 11.53 Z M 175.03 21.65 C 175.13 25.01 177.64 26.52 180.87 26.52 C 182.35 26.52 183.93 26.26 185.22 25.50 C 186.18 24.94 186.94 24.10 187.28 23.02 C 187.40 22.63 187.46 22.23 187.46 21.81 C 187.46 19.14 185.38 18.05 183.12 17.43 C 182.77 17.34 182.42 17.25 182.06 17.15 C 181.80 17.07 181.53 17 181.27 16.90 C 180.91 16.77 180.51 16.59 180.30 16.25 C 180.18 16.03 180.14 15.80 180.14 15.56 C 180.14 15.27 180.22 14.99 180.39 14.75 C 180.82 14.12 181.71 13.91 182.43 13.91 C 183.03 13.91 183.71 14.00 184.20 14.37 C 184.59 14.67 184.78 15.09 184.83 15.55 L 188.25 15.55 C 188.24 14.44 187.93 13.35 187.09 12.56 C 185.95 11.48 184.15 11.21 182.64 11.21 C 179.75 11.21 176.74 12.57 176.74 15.86 C 176.74 17.96 178.19 18.88 179.99 19.52 C 180.38 19.66 180.79 19.76 181.20 19.87 C 182.07 20.11 183.37 20.42 183.85 21.25 C 184 21.49 184.06 21.75 184.06 22.03 C 184.06 22.21 184.03 22.41 183.96 22.58 C 183.61 23.58 182.45 23.82 181.51 23.82 C 179.83 23.82 178.57 23.41 178.44 21.65 Z M 175.03 21.65"/>
   </symbol>
-  <symbol id="i-receipt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h3"/></g></symbol>
-  <symbol id="i-gift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13M12 8S10 3 7.5 4 9 8 12 8zM12 8s2-5 4.5-4S15 8 12 8z"/></g></symbol>
-  <symbol id="i-help" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/></g></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8-8 18-2-8-8-2z"/></g></symbol>
+  <symbol id="i-pump" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="10" height="18" rx="1.5"/><path d="M7 7h4M14 9h3l2 2v6a1.5 1.5 0 0 1-3 0v-3h-2"/></g></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></g></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16V7h11v9M13 10h4l4 4v2h-8"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/></g></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h3"/></g></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13M12 8S10 3 7.5 4 9 8 12 8zM12 8s2-5 4.5-4S15 8 12 8z"/></g></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></g></symbol>
 </svg>
 
 <div class="topbar">
@@ -280,12 +327,12 @@ p { margin: 0; }
     <nav class="menu" id="menu" aria-label="Hauptmenü">
       <a class="active" href="#top">Startseite</a>
       <a href="#tankkarte">Tankkarte</a>
-      <a href="#service">Gutscheinkarten</a>
-      <a href="#service">Tankbeleg anfordern</a>
+      <a href="#bezahlen">Gutscheinkarten</a>
+      <a href="#bezahlen">Tankbeleg anfordern</a>
       <a href="#faq">FAQ</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
-    <div class="cta"><a class="btn btn--white" href="https://www.google.com/maps/search/?api=1&query=Freise+Tankstelle+M%C3%BCnchehof+Seesen" target="_blank" rel="noopener">Route planen</a></div>
+    <div class="cta"><a class="btn btn--white" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
     <button class="burger" id="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </header>
@@ -299,144 +346,166 @@ p { margin: 0; }
     <h1>Einfach tanken. <span>Rund um die Uhr.</span></h1>
     <p class="lead">Diesel, Super E5, Super Plus und AdBlue® – 24 Stunden am Tag, 7 Tage die Woche. Einfach vorfahren, bargeldlos bezahlen und tanken.</p>
     <div class="btns">
-      <a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Freise+Tankstelle+M%C3%BCnchehof+Seesen" target="_blank" rel="noopener">Route planen</a>
-      <a class="btn btn--white" href="#ablauf">So funktioniert's</a>
+      <a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a>
+      <a class="btn btn--ghost" href="#ablauf">So funktioniert's</a>
     </div>
-    <aside class="price-card" id="preise" aria-labelledby="pt">
-      <h2 id="pt">Aktuelle Kraftstoffpreise <small>€ / Liter</small></h2>
-      <ul class="price-list" id="priceList"></ul>
-      <p class="price-note" id="priceNote">Unsere Preise werden automatisch aktualisiert.</p>
-    </aside>
+    <ul class="chips">
+      <li><svg><use href="#i-clock"/></svg>24/7 geöffnet</li>
+      <li><svg><use href="#i-card"/></svg>Bargeldlose Zahlung</li>
+    </ul>
   </div>
 </section>
-
-<!-- 2 · INTRO / KRAFTSTOFFE -->
-<section class="section" id="kraftstoffe">
-  <div class="container intro">
-    <div>
-      <span class="kicker">24/7 geöffnet · Bargeldlose Zahlung</span>
-      <h2 class="h2">Tanken, was Sie brauchen – für Pkw, Transporter, Lkw und Landwirtschaft.</h2>
-      <div class="intro-imgs">
-        <div class="img-a">
-          <img src="img/intro-zapfpistole.jpg" alt="Zapfpistole im Tankstutzen">
-          <div class="stat"><b>24/7</b><span>geöffnet –<br>365 Tage im Jahr</span></div>
-        </div>
-        <div class="img-b"><img src="img/card-hilfe.jpg" alt="Display am Tankautomaten" style="object-position: 30% center"></div>
-      </div>
-    </div>
-    <div class="intro-text">
-      <p class="strong">An unserer Automatentankstelle erhalten Sie rund um die Uhr eine Auswahl an Kraftstoffen für Pkw, Transporter, Lkw, landwirtschaftliche Fahrzeuge und Maschinen.</p>
-      <p class="lead">Einfach vorfahren, Karte am Automaten verwenden und tanken – ohne Wartezeit und ohne Kasse.</p>
-      <ul class="checks">
-        <li>Diesel <small>Pkw, Lkw, Landwirtschaft</small></li>
-        <li>Super E5 <small>Ottomotoren</small></li>
-        <li>Super Plus <small>Hochoktanig</small></li>
-        <li>AdBlue® <small>Direkt am Automaten</small></li>
-      </ul>
-      <div class="btns">
-        <a class="btn btn--dark" href="https://www.google.com/maps/search/?api=1&query=Freise+Tankstelle+M%C3%BCnchehof+Seesen" target="_blank" rel="noopener">Route planen</a>
-        <a class="btn btn--outline" href="#ablauf">So funktioniert's</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 3 · SO FUNKTIONIERT'S + VORAUTORISIERUNG (Zickzack) -->
-<section class="section dark" id="ablauf">
+<div class="prices">
   <div class="container">
-    <div class="zz-intro center">
+    <div class="prices-card" id="preise">
+      <div class="prices-head"><b>Aktuelle Kraftstoffpreise</b><span id="priceStamp">€ / Liter · Unsere Preise werden automatisch aktualisiert.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 2 · SO FUNKTIONIERT'S -->
+<section class="section" id="ablauf">
+  <div class="container">
+    <div class="steps-head">
       <span class="kicker">So funktioniert's</span>
       <h2 class="h2">Tanken – einfach und unkompliziert.</h2>
+      <p class="lead">An unserer Automatentankstelle tanken Sie rund um die Uhr. Die Bedienung erfolgt direkt über den Tankautomaten und ist in wenigen Schritten erledigt.</p>
     </div>
 
-    <div class="zz">
+    <div class="start" aria-hidden="true"><i></i><span class="num">1</span></div>
+    <div class="step-big">
       <div>
-        <span class="kicker">In drei Schritten</span>
-        <h3>Karte vorhalten, tanken, Beleg entnehmen.</h3>
-        <p class="lead">Die Bedienung erfolgt direkt über den Tankautomaten. Auf dem Bildschirm wird Ihnen der jeweils nächste Schritt angezeigt.</p>
-        <ol class="steps">
-          <li><div>Bezahlen<span>Karte in den Kartenschlitz stecken oder vor das NFC-Lesegerät halten und Zapfsäule wählen.</span></div></li>
-          <li><div>Tanken<span>Karte entnehmen und wie gewohnt tanken.</span></div></li>
-          <li><div>Beleg entnehmen<span>Nach dem Tanken können Sie Ihren Beleg am Automaten anfordern.</span></div></li>
-        </ol>
+        <span class="kicker">Schritt 1</span>
+        <h3 class="step-title">Karte verwenden</h3>
+        <p class="step-text">Stecken Sie Ihre Karte in den Kartenschlitz oder halten Sie sie für einige Sekunden vor das NFC-Lesegerät. Folgen Sie anschließend den Anweisungen auf dem Display.</p>
+        <p class="step-note"><span>Ihre Bank reserviert dabei einen Betrag, z. B. 80 € oder 150 €. Das ist keine Abbuchung – <a href="#vorautorisierung">mehr zur Vorautorisierung</a>.</span></p>
       </div>
-      <div class="zz-img zz-img--tl"><img src="img/block-bezahlen.jpg" alt="Karte wird an den Tankautomaten gehalten"></div>
+      <div class="step-img corner-tl"><img src="img/block-bezahlen.jpg" alt="Karte wird an das NFC-Lesegerät des Tankautomaten gehalten"></div>
     </div>
 
-    <div class="conn" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="dot"></i></div>
+    <div class="conn" aria-hidden="true"><i class="a"></i><i class="b"></i><span class="num">2</span></div>
+    <div class="conn-m" aria-hidden="true"><span class="num">2</span></div>
 
-    <div class="zz" id="vorautorisierung">
-      <div class="zz-img zz-img--tr"><img src="img/block-beleg.jpg" alt="Tankbeleg mit Literpreis"></div>
+    <div class="step-pair">
+      <div class="step-small">
+        <div class="step-img corner-tl"><img src="img/card-hilfe.jpg" alt="Display des Tankautomaten"><span class="link" aria-hidden="true"><span class="num">3</span></span></div>
+        <span class="kicker" style="margin-top:26px">Schritt 2</span>
+        <h3 class="step-title" style="margin-top:0">Zapfsäule auswählen</h3>
+        <p class="step-text">Wählen Sie am Automaten die gewünschte Zapfsäule aus und autorisieren Sie die Zahlung.</p>
+      </div>
+      <div class="conn-m" aria-hidden="true"><span class="num">3</span></div>
+      <div class="step-small">
+        <div class="step-img corner-tr"><img src="img/step-tanken.jpg" alt="Zapfpistole steckt im Tankstutzen"></div>
+        <span class="kicker" style="margin-top:26px">Schritt 3</span>
+        <h3 class="step-title" style="margin-top:0">Tanken</h3>
+        <p class="step-text">Karte entnehmen und wie gewohnt tanken. Auf dem Bildschirm wird Ihnen der jeweils nächste Schritt angezeigt.</p>
+      </div>
+    </div>
+
+    <div class="conn" aria-hidden="true"><i class="a"></i><i class="b"></i><span class="num">4</span></div>
+    <div class="conn-m" aria-hidden="true"><span class="num">4</span></div>
+
+    <div class="step-big step-big--rev">
       <div>
-        <span class="kicker">Vorautorisierung</span>
-        <h3>Ein Betrag auf Ihrer Karte wurde reserviert?</h3>
-        <p class="lead">Keine Sorge – dabei handelt es sich nicht um eine zusätzliche Abbuchung. Vor dem Tanken reserviert Ihre Bank einen Höchstbetrag, z. B. 80 € oder 150 €. Die Freigabe des Restbetrags erfolgt automatisch und kann je nach Bank 1–2 Werktage dauern.</p>
-        <div class="calc">
-          <div><span>Reserviert beim Start</span><b>150,00 €</b></div>
-          <div class="paid"><span>Tatsächlich getankt und abgebucht</span><b>48,60 €</b></div>
-          <div><span>Wird von Ihrer Bank wieder freigegeben</span><b>101,40 €</b></div>
-        </div>
-        <div class="quote">Sie bezahlen nur den Betrag, den Sie tatsächlich getankt haben.<small>Auf die Dauer der Reservierung haben wir als Betreiber keinen Einfluss.</small></div>
+        <span class="kicker">Schritt 4</span>
+        <h3 class="step-title">Beleg entnehmen</h3>
+        <p class="step-text">Nach dem Tankvorgang können Sie Ihren Tankbeleg bei Bedarf am Automaten anfordern. Sie bezahlen nur den Betrag, den Sie tatsächlich getankt haben.</p>
+        <p class="step-link">Beleg vergessen oder nicht erhalten? <a href="#bezahlen">Tankbeleg digital anfordern →</a></p>
       </div>
-    </div>
-
-    <div class="cta-mid">
-      <h2 class="h2">Noch Fragen zur Reservierung oder zum Ablauf?</h2>
-      <p class="lead">Die häufigsten Antworten finden Sie in unseren FAQ. Oder rufen Sie uns einfach an.</p>
-      <div class="btns">
-        <a class="btn btn--red" href="#faq">Zu den FAQ</a>
-        <a class="btn btn--outline" href="#kontakt">05381 8511</a>
-      </div>
+      <div class="step-img corner-tr"><img src="img/block-beleg.jpg" alt="Tankbeleg mit Literpreis"></div>
     </div>
   </div>
 </section>
 
-<!-- 4 · SERVICE -->
-<section class="section" id="service">
+<!-- 3 · KRAFTSTOFFE -->
+<section class="section alt" id="kraftstoffe">
   <div class="container">
-    <div class="svc-head">
+    <div class="fuels-head">
       <div>
-        <span class="kicker">Service</span>
-        <h2 class="h2">Alles rund ums Tanken – schnell erledigt.</h2>
+        <span class="kicker">Kraftstoffe</span>
+        <h2 class="h2">Tanken, was Sie brauchen.</h2>
       </div>
-      <div>
-        <p class="lead">Beleg vergessen, ein Geschenk gesucht oder ein Problem am Automaten? Hier finden Sie die passende Hilfe.</p>
-        <div class="btns" style="align-items:center; margin-top:22px">
-          <a class="btn btn--dark" href="#kontakt">Kontakt</a>
-          <a class="call" href="#kontakt"><i></i><span><small>Wir helfen Ihnen gerne</small><b>05381 8511</b></span></a>
-        </div>
-      </div>
+      <p class="lead">An unserer Automatentankstelle erhalten Sie rund um die Uhr eine Auswahl an Kraftstoffen für Pkw, Transporter, Lkw, landwirtschaftliche Fahrzeuge und Maschinen.</p>
     </div>
-    <div class="cards">
-      <article class="card">
-        <div class="card-img"><img src="img/card-beleg.jpg" alt="Nahaufnahme eines Tankbelegs"></div>
-        <h3>Tankbeleg anfordern</h3>
-        <p>Beleg verloren oder am Automaten nicht erhalten? Fordern Sie ihn einfach digital nach.</p>
-        <a class="btn btn--more" href="#service">Zum Formular</a>
-        <svg class="mark" aria-hidden="true"><use href="#i-receipt"/></svg>
-      </article>
-      <article class="card">
-        <div class="card-img"><img src="img/card-gutschein.jpg" alt="Freise Tankgutschein über 50 Euro"></div>
-        <h3>Gutscheinkarten</h3>
-        <p>Tankgutscheine zum Verschenken – für Mitarbeiter, Kunden oder die Familie.</p>
-        <a class="btn btn--more" href="#service">Mehr erfahren</a>
-        <svg class="mark" aria-hidden="true"><use href="#i-gift"/></svg>
-      </article>
-      <article class="card">
-        <div class="card-img"><img src="img/card-hilfe-tel.jpg" alt="Telefonnummer 05381 8511"></div>
-        <h3>Hilfe bei Problemen</h3>
-        <p>Karte abgelehnt oder Zapfsäule gibt nicht frei? Halten Sie Datum, Uhrzeit, Betrag und Zahlungsart bereit.</p>
-        <a class="btn btn--more" href="#kontakt">Kontakt</a>
-        <svg class="mark" aria-hidden="true"><use href="#i-help"/></svg>
-      </article>
+    <div class="fuels">
+      <article class="fuel"><span class="fuel-ico"><svg><use href="#i-truck"/></svg></span><h3>Diesel</h3><p>Für Pkw, Transporter, Lkw, landwirtschaftliche Fahrzeuge und Maschinen.</p><div class="fuel-price" data-fuel="0"></div></article>
+      <article class="fuel"><span class="fuel-ico"><svg><use href="#i-drop"/></svg></span><h3>Super E5</h3><p>Superbenzin für Pkw und andere Fahrzeuge mit Ottomotor.</p><div class="fuel-price" data-fuel="1"></div></article>
+      <article class="fuel"><span class="fuel-ico"><svg><use href="#i-drop"/></svg></span><h3>Super Plus</h3><p>Hochoktaniger Ottokraftstoff für Fahrzeuge mit entsprechenden Anforderungen.</p><div class="fuel-price" data-fuel="2"></div></article>
+      <article class="fuel"><span class="fuel-ico"><svg><use href="#i-pump"/></svg></span><h3>AdBlue®</h3><p>AdBlue® erhalten Sie ebenfalls direkt an unserer Automatentankstelle.</p><div class="fuel-price" data-fuel="3"></div></article>
     </div>
   </div>
 </section>
 
-<!-- 5 · TANKKARTE (Banner) -->
-<div class="banner-wrap" id="tankkarte">
+<!-- 4 · VORAUTORISIERUNG -->
+<section class="section dark" id="vorautorisierung">
+  <div class="container auth">
+    <div>
+      <span class="kicker">Vorautorisierung</span>
+      <h2 class="h2">Ein Betrag auf Ihrer Karte wurde reserviert?</h2>
+      <p class="calm">Keine Sorge – dabei handelt es sich nicht um eine zusätzliche Abbuchung.</p>
+      <p class="lead">Vor dem Tankvorgang wird bei Kartenzahlung ein festgelegter Höchstbetrag auf Ihrer Karte reserviert, z. B. 80 € oder 150 €. Diese Vorautorisierung dient lediglich dazu, die Zahlung für den anschließenden Tankvorgang sicherzustellen.</p>
+      <p class="lead">Nach dem Tanken wird der tatsächliche Betrag übermittelt und die Reservierung aufgehoben. Die Freigabe erfolgt automatisch durch Ihre Bank und kann je nach Bank 1–2 Werktage dauern. Auf die Dauer haben wir als Tankstellenbetreiber keinen Einfluss.</p>
+      <div class="quote"><b>Sie bezahlen nur den Betrag, den Sie tatsächlich getankt haben.</b><span>Der höhere Betrag ist nur eine Reservierung Ihrer Bank – keine Abbuchung.</span></div>
+    </div>
+    <figure class="ledger" id="ledger" style="margin:0">
+      <div class="ledger-head"><span>So sieht das auf Ihrem Konto aus</span><span>Beispiel</span></div>
+      <div class="lrow"><div class="lrow-top"><span>Reserviert beim Start<small>Vorautorisierung, keine Abbuchung</small></span><b>150,00 €</b></div><div class="bar bar--hold"><i></i></div></div>
+      <div class="lrow paid"><div class="lrow-top"><span>Tatsächlich getankt<small>Nur dieser Betrag wird abgebucht</small></span><b>48,60 €</b></div><div class="bar bar--paid"><i></i></div></div>
+      <div class="lrow"><div class="lrow-top"><span>Wird wieder freigegeben<small>Automatisch durch Ihre Bank</small></span><b>101,40 €</b></div><div class="bar bar--free"><i></i></div></div>
+      <a class="btn btn--ghost" href="#faq">Mehr zur Vorautorisierung</a>
+    </figure>
+  </div>
+</section>
+
+<!-- 5 · BEZAHLEN & SERVICE -->
+<section class="section" id="bezahlen">
+  <div class="container pay">
+    <div>
+      <span class="kicker">Bezahlen</span>
+      <h2 class="h2">Einfach bargeldlos bezahlen.</h2>
+      <p class="lead">An unserem Tankautomaten stehen Ihnen verschiedene bargeldlose Zahlungsmöglichkeiten zur Verfügung.</p>
+      <!-- Platzhalter: durch Logos der tatsächlich akzeptierten Karten ersetzen -->
+      <div class="pay-chips"><span>girocard</span><span>Mastercard</span><span>Visa</span><span><i></i>Freise Tankkarte</span></div>
+      <p class="pay-note">Bitte beachten Sie, dass es bei Kartenzahlungen zu einer vorübergehenden <a href="#vorautorisierung">Vorautorisierung</a> kommen kann.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile" href="#bezahlen"><span class="tile-ico"><svg><use href="#i-receipt"/></svg></span><div><h3>Tankbeleg anfordern</h3><p>Beleg verloren oder nicht erhalten? Hier digital nachfordern.</p></div><svg><use href="#i-arrow"/></svg></a>
+      <a class="tile" href="#tankkarte"><span class="tile-ico"><svg><use href="#i-gift"/></svg></span><div><h3>Gutscheinkarten</h3><p>Tankgutscheine zum Verschenken – für Mitarbeiter, Kunden oder Familie.</p></div><svg><use href="#i-arrow"/></svg></a>
+      <a class="tile" href="#kontakt"><span class="tile-ico"><svg><use href="#i-help"/></svg></span><div><h3>Hilfe bei Problemen</h3><p>Karte abgelehnt, Zapfsäule gibt nicht frei? So erreichen Sie uns.</p></div><svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · FAQ -->
+<section class="section alt" id="faq" style="padding-bottom:230px">
+  <div class="container faq-grid">
+    <div class="faq-side">
+      <span class="kicker">FAQ</span>
+      <h2 class="h2">Häufige Fragen</h2>
+      <p class="lead">Die meisten Fragen drehen sich um den Ablauf am Automaten und die Reservierung auf der Karte. Hier die Antworten.</p>
+      <div class="help">
+        <b>Ihre Frage ist nicht dabei?</b>
+        <p>Halten Sie Datum, ungefähre Uhrzeit, Tankbetrag und Zahlungsart bereit.</p>
+        <a class="btn btn--red" href="#kontakt">Kontakt aufnehmen</a>
+      </div>
+    </div>
+    <div class="faq">
+      <details open><summary>Wie funktioniert das Tanken am Tankautomaten?</summary><p>Karte am Automaten verwenden, den Anweisungen auf dem Display folgen, Zapfsäule auswählen und anschließend tanken. Die einzelnen Schritte werden Ihnen direkt am Automaten angezeigt.</p></details>
+      <details><summary>Warum wird ein höherer Betrag auf meiner Karte reserviert?</summary><p>Dabei handelt es sich um eine Vorautorisierung. Vor dem Tankvorgang wird ein Höchstbetrag reserviert, um die Zahlungsfähigkeit der verwendeten Karte zu bestätigen. Tatsächlich abgerechnet wird ausschließlich der getankte Betrag.</p></details>
+      <details><summary>Warum sehe ich zwei Beträge auf meinem Konto?</summary><p>Neben dem tatsächlichen Tankbetrag kann vorübergehend noch der reservierte Vorautorisierungsbetrag angezeigt werden. Es handelt sich dabei nicht um eine zweite Abbuchung.</p></details>
+      <details><summary>Wann wird die Reservierung wieder aufgehoben?</summary><p>Die Freigabe erfolgt automatisch durch Ihre Bank bzw. Ihr Kreditkartenunternehmen und kann je nach Bank 1–2 Werktage dauern. Auf die Dauer der Reservierung haben wir keinen Einfluss.</p></details>
+      <details><summary>Kann ich rund um die Uhr tanken?</summary><p>Ja. Unsere Automatentankstelle steht Ihnen 24 Stunden am Tag und 7 Tage die Woche zur Verfügung.</p></details>
+      <details><summary>Welche Kraftstoffe kann ich tanken?</summary><p>An unserer Automatentankstelle erhalten Sie Diesel, Super E5, Super Plus und AdBlue®.</p></details>
+      <details><summary>Wie erhalte ich einen Tankbeleg?</summary><p>Nach Abschluss des Tankvorgangs können Sie Ihren Beleg am Tankautomaten anfordern. Falls Sie keinen erhalten haben, fordern Sie ihn über unser Formular digital an.</p></details>
+      <details><summary>Was mache ich bei einer Störung?</summary><p>Rufen Sie uns an unter 05381 8511 oder schreiben Sie an info@freise-seesen.de.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · TANKKARTE + STANDORT (über der Karte in Graustufen) -->
+<section class="map-area" id="kontakt">
   <div class="container">
-    <div class="banner">
+    <div class="banner" id="tankkarte">
       <div class="banner-visual" aria-hidden="true">
         <div class="card3d">
           <div class="face front">
@@ -451,54 +520,27 @@ p { margin: 0; }
         </div>
       </div>
       <div class="banner-text">
-        <span class="over">Sind Sie öfter hier?</span>
+        <span class="kicker">Sind Sie öfter hier?</span>
         <h2 class="h2">Tankkarte und Zahlung auf Rechnung.</h2>
         <!-- Platzhaltertext: Konditionen vom Kunden bestätigen lassen -->
         <p>Für Betriebe, Landwirte und alle, die regelmäßig bei uns tanken. Beantragen Sie Ihre Freise Tankkarte bequem online.</p>
         <div class="btns">
           <a class="btn btn--white" href="#tankkarte">Tankkarte beantragen</a>
-          <a class="btn btn--outline-w" href="#service">Gutscheinkarten</a>
+          <a class="btn btn--ghost" href="#bezahlen">Gutscheinkarten</a>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- 6 · FAQ -->
-<section class="section dark" id="faq">
-  <div class="container faq-grid">
-    <div>
-      <span class="kicker">FAQ</span>
-      <h2 class="h2">Häufige Fragen</h2>
-      <p class="lead" style="margin-top:14px">Viele Fragen drehen sich um den Ablauf am Automaten und die Reservierung auf der Karte.</p>
-      <div class="btns"><a class="btn btn--outline" href="#faq">Alle Fragen &amp; Antworten</a></div>
-    </div>
-    <div class="faq">
-      <details open><summary>Wie funktioniert das Tanken am Tankautomaten?</summary><p>Karte am Automaten verwenden, den Anweisungen auf dem Display folgen, Zapfsäule auswählen und anschließend tanken. Die einzelnen Schritte werden Ihnen direkt am Automaten angezeigt.</p></details>
-      <details><summary>Warum wird ein höherer Betrag auf meiner Karte reserviert?</summary><p>Dabei handelt es sich um eine Vorautorisierung. Vor dem Tankvorgang wird ein Höchstbetrag reserviert, um die Zahlungsfähigkeit der Karte zu bestätigen. Abgerechnet wird ausschließlich der getankte Betrag.</p></details>
-      <details><summary>Warum sehe ich zwei Beträge auf meinem Konto?</summary><p>Neben dem tatsächlichen Tankbetrag kann vorübergehend noch der reservierte Betrag angezeigt werden. Es handelt sich dabei nicht um eine zweite Abbuchung.</p></details>
-      <details><summary>Wann wird die Reservierung wieder aufgehoben?</summary><p>Die Freigabe erfolgt automatisch durch Ihre Bank und kann je nach Bank 1–2 Werktage dauern. Auf die Dauer haben wir keinen Einfluss.</p></details>
-      <details><summary>Kann ich rund um die Uhr tanken?</summary><p>Ja. Unsere Automatentankstelle steht Ihnen 24 Stunden am Tag und 7 Tage die Woche zur Verfügung.</p></details>
-      <details><summary>Wie erhalte ich einen Tankbeleg?</summary><p>Nach dem Tanken am Automaten. Falls Sie keinen erhalten haben, können Sie ihn über unser Formular digital anfordern.</p></details>
-      <details><summary>Was mache ich bei einer Störung?</summary><p>Rufen Sie uns an unter 05381 8511 oder schreiben Sie an info@handelpro.de.</p></details>
-    </div>
-  </div>
-</section>
-
-<!-- 7 · STANDORT -->
-<section class="map" id="kontakt">
-  <iframe title="Karte: Freise Automatentankstelle Münchehof" src="https://maps.google.com/maps?q=Freise%20Tankstelle%20M%C3%BCnchehof%20Seesen&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  <div class="container">
-    <div class="map-card">
+    <div class="map-img" role="img" aria-label="Karte: Tankstelle Freise an der Kirchberger Straße in Münchehof"></div>
+    <div class="contact-card">
       <span class="kicker">Standort &amp; Kontakt</span>
       <h2 class="h2">Einfach vorbeikommen und tanken.</h2>
       <ul class="contact">
-        <li><small>Adresse</small><span>Münchehof / Seesen · <span class="tbd">Straße + Nr.</span></span></li>
+        <li><small>Adresse</small><span>Kirchberger Str. 16<br>38723 Seesen-Münchehof</span></li>
         <li><small>Geöffnet</small><span>24 Stunden · 7 Tage die Woche</span></li>
         <li><small>Telefon</small><span>05381 8511</span></li>
-        <li><small>E-Mail</small><span>info@handelpro.de</span></li>
+        <li><small>E-Mail</small><span>info@freise-seesen.de</span></li>
       </ul>
-      <div class="btns" style="margin-top:22px"><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Freise+Tankstelle+M%C3%BCnchehof+Seesen" target="_blank" rel="noopener">Route planen</a></div>
+      <div class="btns" style="margin-top:24px"><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
     </div>
   </div>
 </section>
@@ -508,9 +550,9 @@ p { margin: 0; }
   <div class="rule" aria-hidden="true"></div>
   <div class="container footer-main">
     <div><a class="flogo" href="#top" aria-label="Freise Seesen"><svg viewBox="0 0 325.882 61.1765" aria-hidden="true"><use href="#logo"/></svg></a><p>Automatentankstelle in Münchehof.<br>Betrieben durch die handelpro GmbH.</p></div>
-    <div><h4>Tankstelle</h4><ul><li><a href="#preise">Aktuelle Preise</a></li><li><a href="#ablauf">So funktioniert's</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-    <div><h4>Service</h4><ul><li><a href="#tankkarte">Tankkarte</a></li><li><a href="#service">Gutscheinkarten</a></li><li><a href="#service">Tankbeleg anfordern</a></li></ul></div>
-    <div><h4>Kontakt</h4><ul><li>05381 8511</li><li>info@handelpro.de</li><li>24/7 geöffnet</li></ul></div>
+    <div><h4>Tankstelle</h4><ul><li><a href="#preise">Aktuelle Preise</a></li><li><a href="#ablauf">So funktioniert's</a></li><li><a href="#kraftstoffe">Kraftstoffe</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+    <div><h4>Service</h4><ul><li><a href="#tankkarte">Tankkarte</a></li><li><a href="#bezahlen">Gutscheinkarten</a></li><li><a href="#bezahlen">Tankbeleg anfordern</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
+    <div><h4>Kontakt</h4><ul><li>Kirchberger Str. 16<br>38723 Seesen-Münchehof</li><li>05381 8511</li><li>info@freise-seesen.de</li></ul></div>
   </div>
   <div class="socket"><div class="container"><span>© 2026 handelpro GmbH</span><span><a href="#top">Impressum</a> · <a href="#top">Datenschutz</a></span></div></div>
 </footer>
@@ -520,11 +562,22 @@ p { margin: 0; }
 const PRICES = { demo: true, items: [
   { name: "Diesel", price: 1.689 }, { name: "Super E5", price: 1.789 },
   { name: "Super Plus", price: 1.889 }, { name: "AdBlue®", price: 0.899 } ] };
-document.getElementById("priceList").innerHTML = PRICES.items.map(it => {
-  const [e, c] = it.price.toFixed(3).split(".");
-  return `<li><span>${it.name}</span><span class="price" aria-label="${it.price.toFixed(3).replace(".", ",")} Euro pro Liter">${e},${c.slice(0, 2)}<sup>${c[2]}</sup></span></li>`;
-}).join("");
-if (PRICES.demo) document.getElementById("priceNote").textContent = "Beispielpreise · werden später automatisch aktualisiert.";
+const fmt = p => { const [e, c] = p.toFixed(3).split("."); return `${e},${c.slice(0, 2)}<sup>${c[2]}</sup>`; };
+document.getElementById("preise").insertAdjacentHTML("beforeend", PRICES.items.map(it =>
+  `<div class="price-cell"><span class="price-name">${it.name}</span><span class="price" aria-label="${it.price.toFixed(3).replace(".", ",")} Euro pro Liter">${fmt(it.price)}<small>€</small></span></div>`).join(""));
+if (PRICES.demo) document.getElementById("priceStamp").textContent = "€ / Liter · Beispielpreise";
+document.querySelectorAll("[data-fuel]").forEach(el => {
+  el.innerHTML = `Aktuell: <span>${fmt(PRICES.items[+el.dataset.fuel].price)}</span> € / Liter`;
+});
+
+/* Balken der Vorautorisierung laufen beim Reinscrollen ein */
+const ledger = document.getElementById("ledger");
+if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  ledger.classList.add("wait");
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { requestAnimationFrame(() => ledger.classList.remove("wait")); obs.disconnect(); } });
+  }, { threshold: 0.35 }).observe(ledger);
+}
 
 const burger = document.getElementById("burger"), menu = document.getElementById("menu");
 burger.addEventListener("click", () => burger.setAttribute("aria-expanded", menu.classList.toggle("open")));
