@@ -32,6 +32,7 @@ img { max-width: 100%; display: block; }
 a { color: inherit; }
 h1, h2, h3 { margin: 0; line-height: 1.12; text-wrap: balance; font-weight: 800; letter-spacing: -0.02em; }
 p { margin: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
 
@@ -46,7 +47,7 @@ p { margin: 0; }
 .kicker::before { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--red); flex: none; }
 .dark .kicker, .hero .kicker { color: #fff; }
 .dark .kicker::before, .hero .kicker::before { background: var(--red); }
-.h2 { font-size: clamp(32px, 4vw, 48px); }
+.h2 { font-size: clamp(28px, 3.2vw, 40px); }
 .lead { margin-top: 18px; font-size: 17px; color: var(--text); max-width: 62ch; }
 .dark .lead { color: var(--on-dark-muted); }
 
@@ -95,7 +96,7 @@ p { margin: 0; }
 .hero { position: relative; background: var(--ink) url("img/hero-zapfpistole.jpg") 62% center / cover no-repeat; color: #fff; }
 .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,15,17,.95) 0%, rgba(14,15,17,.8) 40%, rgba(14,15,17,.25) 75%, rgba(14,15,17,.15) 100%); }
 .hero .container { position: relative; padding-block: 120px 160px; }
-.hero h1 { font-size: clamp(42px, 6vw, 76px); letter-spacing: -0.035em; }
+.hero h1 { font-size: clamp(38px, 5vw, 62px); letter-spacing: -0.03em; }
 .hero h1 span { display: block; color: var(--red); }
 @media (min-width: 700px) { .hero h1 span { white-space: nowrap; } }
 .hero .lead { color: rgba(255,255,255,.86); max-width: 540px; font-size: 18px; }
@@ -117,7 +118,11 @@ p { margin: 0; }
 @media (max-width: 460px) { .price { font-size: 34px; } .price-cell { padding: 18px 20px; } .prices-head { flex-direction: column; align-items: flex-start; } }
 
 /* ---------- 2 · Schritte: Bilder + Linie mit nummerierten Punkten ---------- */
-.steps-head { max-width: 720px; margin-bottom: 30px; }
+.steps-head { margin-bottom: 56px; }
+.step-first { align-items: stretch; }
+.step-first > div:first-child { align-self: stretch !important; }
+.step-media { display: flex; flex-direction: column; }
+.step-media .start { flex: 1 0 90px; }
 .num { position: absolute; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: var(--red); color: #fff; font-weight: 800; font-size: 19px; box-shadow: 0 0 0 6px #fff; z-index: 2; }
 .step-big { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; align-items: end; }
 .step-img { position: relative; overflow: hidden; background: var(--alt); }
@@ -127,17 +132,17 @@ p { margin: 0; }
 .step-big > div:not(.step-img) { align-self: center; }
 .corner-tl { border-radius: var(--corner) 0 0 0; }
 .corner-tr { border-radius: 0 var(--corner) 0 0; }
-.step-title { font-size: clamp(26px, 2.8vw, 34px); }
-.step-small .step-title { font-size: 24px; margin-top: 26px; }
+.step-title { font-size: clamp(24px, 2.4vw, 29px); }
+.step-small .step-title { font-size: 22px; margin-top: 26px; }
 .step-text { margin-top: 14px; color: var(--text); }
 .step-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 22px; padding: 16px 18px; border-radius: 14px; background: var(--alt); font-size: 15px; color: var(--text); }
 .step-note::before { content: "!"; flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; font-size: 13px; margin-top: 1px; }
 .step-note a, .step-link a { color: var(--ink); font-weight: 700; }
 .step-link { margin-top: 20px; font-size: 15px; color: var(--text); }
 /* Startstück mit Punkt 1 */
-.start { position: relative; height: 90px; }
-.start i { position: absolute; top: 25px; bottom: 0; left: calc(100% - (100% - 80px) / 4 - 2.5px); width: 5px; background: var(--ink); }
-.start .num { top: 0; left: calc(100% - (100% - 80px) / 4 - 25px); }
+.start { position: relative; }
+.start i { position: absolute; top: 25px; bottom: 0; left: calc(50% - 2.5px); width: 5px; background: var(--ink); }
+.start .num { top: 0; left: calc(50% - 25px); }
 /* Verbindung rechts → links (Balken mit Punkt) */
 .conn { position: relative; height: 140px; }
 .conn .a, .conn .b { position: absolute; border: 0 solid var(--ink); }
@@ -162,6 +167,8 @@ p { margin: 0; }
   .conn-m::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 5px; margin-left: -2.5px; background: var(--ink); }
   .conn-m .num { top: 20px; left: calc(50% - 25px); }
   .step-small .step-title { margin-top: 24px; }
+  .step-first .step-media { margin-top: 32px; }
+  .step-first .step-img { margin-bottom: 0 !important; }
 }
 
 /* ---------- 3 · Kraftstoffe ---------- */
@@ -174,7 +181,7 @@ p { margin: 0; }
 .fuel:hover .fuel-price { border-color: rgba(255,255,255,.15); }
 .fuel-ico { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--red); color: #fff; }
 .fuel-ico svg { width: 28px; height: 28px; }
-.fuel h3 { margin-top: 26px; font-size: 28px; }
+.fuel h3 { margin-top: 24px; font-size: 24px; }
 .fuel p { margin-top: 10px; color: var(--text); font-size: 15px; transition: color .3s; }
 .fuel-price { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; font-weight: 600; }
 .fuel p { margin-bottom: 22px; }
@@ -254,15 +261,17 @@ p { margin: 0; }
 .map-area { position: relative; display: flow-root; background: #e8e8e8; padding-bottom: 50px; }
 .map-bg { position: absolute; inset: 0; background: url("img/karte-grau.jpg") 50% 48% / cover no-repeat; }
 .map-area .container { position: relative; }
-.loc-bar { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr 1fr 1fr 1.15fr; margin-top: 380px; background: #fff; border-radius: var(--r); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(14,15,17,.5); }
+.loc-bar { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.35fr .9fr 1.15fr; margin-top: 380px; background: #fff; border-radius: var(--r); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(14,15,17,.5); }
 .loc-img { min-height: 150px; }
 .loc-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
-.loc-cell { padding: 26px 30px; border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.loc-cell { padding: 28px 30px; border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; }
 .loc-img + .loc-cell { border-left: 0; }
-.loc-cell small { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
+.loc-cell small { font-size: 13px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
 .loc-cell b { font-size: 17px; font-weight: 700; line-height: 1.45; }
-.loc-cell a { font-size: 14px; font-weight: 700; color: var(--red); text-decoration: none; margin-top: 4px; }
-.loc-cell a:hover { text-decoration: underline; }
+.loc-cell .btn { min-height: 42px; padding: 0 20px; font-size: 14px; margin-top: 10px; }
+.loc-cell .btn svg { width: 16px; height: 16px; }
+.loc-line { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
+.loc-line svg { width: 17px; height: 17px; color: var(--red); flex: none; }
 .loc-open { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #1a8a4a; margin-top: 4px; }
 .loc-open::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #22b35e; }
 @media (max-width: 980px) { .loc-bar { grid-template-columns: 1fr 1fr; margin-top: 320px; } .loc-img { grid-column: 1 / -1; height: 200px; } .loc-cell { border-left: 0; border-top: 1px solid var(--line); } .loc-cell:nth-child(odd) { border-left: 1px solid var(--line); } }
@@ -305,36 +314,43 @@ p { margin: 0; }
 /* ---------- Footer: links Kontakt, rechts Formular – ohne Kasten ---------- */
 .footer { background: var(--ink); color: var(--on-dark-muted); font-size: 15px; }
 .footer .rule { height: 6px; background: var(--red); }
-.footer-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 100px; padding-block: 90px 80px; align-items: start; }
+.footer-main { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .9fr) minmax(0, 1.25fr); gap: 60px; padding-block: 80px 70px; align-items: start; }
+.f-links { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.f-links h4 { margin: 0 0 16px; color: #fff; font-size: 15px; font-weight: 700; }
+.f-links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
 .footer .flogo { display: block; width: 210px; color: #fff; }
 .f-claim { margin-top: 22px; max-width: 40ch; }
-.f-contact { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 20px; }
-.f-contact li { display: flex; gap: 16px; align-items: center; color: #fff; font-weight: 600; line-height: 1.45; }
+.f-contact { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 14px; }
+.f-contact li { display: flex; gap: 14px; align-items: center; color: #fff; font-weight: 400; line-height: 1.45; }
 .f-contact small { display: block; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--on-dark-muted); }
-.f-contact i { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--ink-3); color: var(--red); flex: none; }
-.f-contact svg { width: 19px; height: 19px; }
+.f-contact i { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--ink-3); color: var(--red); flex: none; }
+.f-contact svg { width: 16px; height: 16px; }
+.f-contact small { display: none; }
 .footer a { text-decoration: none; }
 .footer a:hover { color: #fff; }
-.f-form { display: grid; gap: 14px; }
+.f-form { display: grid; gap: 10px; }
 .f-form .kicker { color: #fff; margin-bottom: 0; }
-.f-form .h2 { font-size: 34px; color: #fff; margin-bottom: 10px; }
-.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.f-form .h2 { font-size: 15px; font-weight: 700; letter-spacing: 0; color: #fff; margin-bottom: 6px; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .field { display: grid; gap: 7px; font-size: 13px; font-weight: 600; color: var(--on-dark-muted); }
-.field input, .field select, .field textarea { width: 100%; font: 400 15px/1.5 var(--font); color: #fff; background: var(--ink-3); border: 2px solid transparent; border-radius: 12px; padding: 13px 16px; outline: none; transition: border-color .2s; color-scheme: dark; }
-.field textarea { resize: vertical; min-height: 120px; }
+.field input, .field select, .field textarea { width: 100%; font: 400 14px/1.5 var(--font); color: #fff; background: var(--ink-3); border: 1px solid transparent; border-radius: 8px; padding: 10px 14px; outline: none; transition: border-color .2s; color-scheme: dark; }
+.field textarea { resize: vertical; min-height: 84px; }
+.field input::placeholder { color: #8a8789; }
+.field select:invalid { color: #8a8789; }
 .field textarea::placeholder { color: #8a8789; }
 .field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; padding-right: 44px; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: rgba(255,255,255,.55); }
-.check { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; line-height: 1.55; color: var(--on-dark-muted); cursor: pointer; margin-top: 4px; }
-.check input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--red); }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; line-height: 1.55; color: var(--on-dark-muted); cursor: pointer; margin-top: 4px; }
+.check input { flex: none; width: 16px; height: 16px; margin: 1px 0 0; accent-color: var(--red); }
 .check a { color: #fff; font-weight: 600; text-decoration: underline; }
-.f-form .btn { justify-self: start; margin-top: 6px; }
+.f-form .btn { justify-self: start; margin-top: 4px; min-height: 44px; padding: 0 26px; font-size: 14px; }
 .f-status { font-size: 14px; font-weight: 600; color: #fff; }
 .f-status:empty { display: none; }
 .socket { border-top: 1px solid rgba(255,255,255,.08); }
 .socket .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding-block: 22px; font-size: 13px; }
 .socket nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
-@media (max-width: 960px) { .footer-main { grid-template-columns: 1fr; gap: 64px; } }
+@media (max-width: 1060px) { .footer-main { grid-template-columns: 1fr 1fr; } .f-form { grid-column: 1 / -1; } }
+@media (max-width: 700px) { .footer-main { grid-template-columns: 1fr; gap: 48px; } }
 @media (max-width: 560px) { .f-row { grid-template-columns: 1fr; } }
 </style>
 
@@ -411,21 +427,22 @@ p { margin: 0; }
 <!-- 2 · SO FUNKTIONIERT'S -->
 <section class="section" id="ablauf">
   <div class="container">
-    <div class="steps-head">
-      <span class="kicker">So funktioniert's</span>
-      <h2 class="h2">Tanken – einfach und unkompliziert.</h2>
-      <p class="lead">An unserer Automatentankstelle tanken Sie rund um die Uhr. Die Bedienung erfolgt direkt über den Tankautomaten und ist in wenigen Schritten erledigt.</p>
-    </div>
-
-    <div class="start" aria-hidden="true"><i></i><span class="num">1</span></div>
-    <div class="step-big">
+    <div class="step-big step-first">
       <div>
+        <div class="steps-head">
+          <span class="kicker">So funktioniert's</span>
+          <h2 class="h2">Tanken – einfach und unkompliziert.</h2>
+          <p class="lead">An unserer Automatentankstelle tanken Sie rund um die Uhr. Die Bedienung erfolgt direkt über den Tankautomaten und ist in wenigen Schritten erledigt.</p>
+        </div>
         <span class="kicker">Schritt 1</span>
         <h3 class="step-title">Karte verwenden</h3>
         <p class="step-text">Stecken Sie Ihre Karte in den Kartenschlitz oder halten Sie sie für einige Sekunden vor das NFC-Lesegerät. Folgen Sie anschließend den Anweisungen auf dem Display.</p>
         <p class="step-note"><span>Ihre Bank reserviert dabei einen Betrag, z. B. 80 € oder 150 €. Das ist keine Abbuchung – <a href="#vorautorisierung">mehr zur Vorautorisierung</a>.</span></p>
       </div>
-      <div class="step-img corner-tl"><img src="img/block-bezahlen.jpg" alt="Karte wird an das NFC-Lesegerät des Tankautomaten gehalten"></div>
+      <div class="step-media">
+        <div class="start" aria-hidden="true"><i></i><span class="num">1</span></div>
+        <div class="step-img corner-tl"><img src="img/block-bezahlen.jpg" alt="Karte wird an das NFC-Lesegerät des Tankautomaten gehalten"></div>
+      </div>
     </div>
 
     <div class="conn" aria-hidden="true"><i class="a"></i><i class="b"></i><span class="num">2</span></div>
@@ -566,13 +583,13 @@ p { margin: 0; }
           </div>
           <div class="face back">
             <div class="stripe"></div>
-            <p><b>Freise Automatentankstelle</b><br>24/7 tanken · Zahlung auf Rechnung</p>
+            <p><b>Freise Automatentankstelle</b><br>24/7 tanken in Seesen-Münchehof</p>
           </div>
         </div>
       </div>
       <div class="banner-text">
         <span class="kicker">Sind Sie öfter hier?</span>
-        <h2 class="h2">Tankkarte und Zahlung auf Rechnung.</h2>
+        <h2 class="h2">Die Freise Tankkarte.</h2>
         <!-- Platzhaltertext: Konditionen vom Kunden bestätigen lassen -->
         <p>Für Betriebe, Landwirte und alle, die regelmäßig bei uns tanken. Auch Gutscheinkarten zum Verschenken erhalten Sie direkt bei uns.</p>
         <div class="ask">
@@ -588,9 +605,9 @@ p { margin: 0; }
     <div class="map-m" role="img" aria-label="Karte: Tankstelle Freise an der Kirchberger Straße in Münchehof"></div>
     <div class="loc-bar">
       <div class="loc-img"><img src="img/tankstelle.jpg" alt="Die Freise Automatentankstelle an der Kirchberger Straße"></div>
-      <div class="loc-cell"><small>Adresse</small><b>Kirchberger Str. 16<br>38723 Seesen-Münchehof</b><a href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener">Route planen →</a></div>
+      <div class="loc-cell"><small>Adresse</small><b>Kirchberger Str. 16<br>38723 Seesen-Münchehof</b><a class="btn btn--red" href="https://www.google.com/maps/search/?api=1&query=Kirchberger+Str.+16,+38723+Seesen" target="_blank" rel="noopener"><svg><use href="#i-route"/></svg>Route planen</a></div>
       <div class="loc-cell"><small>Geöffnet</small><b>24 Stunden<br>7 Tage die Woche</b><span class="loc-open">Jetzt geöffnet</span></div>
-      <div class="loc-cell"><small>Telefon &amp; E-Mail</small><b>05381 8511<br>info@freise-seesen.de</b></div>
+      <div class="loc-cell"><small>Kontaktdaten</small><span class="loc-line"><svg><use href="#i-phone"/></svg>05381 8511</span><span class="loc-line"><svg><use href="#i-mail"/></svg>info@freise-seesen.de</span></div>
     </div>
   </div>
 </section>
@@ -610,29 +627,33 @@ p { margin: 0; }
       </ul>
     </div>
 
+    <nav class="f-links" aria-label="Footer-Menü">
+      <div><h4>Tankstelle</h4><ul><li><a href="#preise">Aktuelle Preise</a></li><li><a href="#ablauf">So funktioniert's</a></li><li><a href="#kraftstoffe">Kraftstoffe</a></li><li><a href="#vorautorisierung">Vorautorisierung</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Service</h4><ul><li><a href="#tankkarte">Tankkarte</a></li><li><a href="#anfrage" data-topic="Gutscheinkarte anfordern">Gutscheinkarten</a></li><li><a href="#anfrage" data-topic="Tankbeleg anfordern">Tankbeleg anfordern</a></li><li><a href="#kontakt">Standort</a></li><li><a href="#anfrage">Kontakt</a></li></ul></div>
+    </nav>
+
     <form class="f-form" id="anfrage" novalidate>
-      <span class="kicker">Kontaktformular</span>
-      <h2 class="h2">Schreiben Sie uns.</h2>
+      <h2 class="h2">Schreiben Sie uns</h2>
       <div class="f-row">
-        <label class="field"><span>Name</span><input id="f-name" name="name" type="text" autocomplete="name" required></label>
-        <label class="field"><span>E-Mail</span><input id="f-mail" name="email" type="email" autocomplete="email" required></label>
+        <label class="field"><span class="sr">Name</span><input placeholder="Name" id="f-name" name="name" type="text" autocomplete="name" required></label>
+        <label class="field"><span class="sr">E-Mail</span><input placeholder="E-Mail" id="f-mail" name="email" type="email" autocomplete="email" required></label>
       </div>
-      <label class="field"><span>Ihr Anliegen</span>
+      <label class="field"><span class="sr">Ihr Anliegen</span>
         <select id="f-topic" name="anliegen" required>
-          <option value="" disabled selected>Bitte auswählen</option>
+          <option value="" disabled selected>Ihr Anliegen auswählen</option>
           <option>Tankkarte beantragen</option>
           <option>Gutscheinkarte anfordern</option>
           <option>Tankbeleg anfordern</option>
           <option>Frage &amp; Rückmeldung</option>
         </select>
       </label>
-      <label class="field"><span>Nachricht</span><textarea id="f-msg" name="nachricht" rows="4" placeholder="Bei Tankbelegen bitte Datum, ungefähre Uhrzeit, Betrag und Zahlungsart angeben."></textarea></label>
+      <label class="field"><span class="sr">Nachricht</span><textarea id="f-msg" name="nachricht" rows="3" placeholder="Ihre Nachricht – bei Tankbelegen bitte Datum, Uhrzeit, Betrag und Zahlungsart angeben."></textarea></label>
       <label class="check"><input id="f-privacy" type="checkbox" required><span>Ich habe die <a href="#top">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verarbeitet werden.</span></label>
       <button class="btn btn--red" type="submit">Absenden</button>
       <p class="f-status" id="f-status" role="status"></p>
     </form>
   </div>
-  <div class="socket"><div class="container"><span>© 2026 Freise Automatentankstelle</span><nav aria-label="Footer"><a href="#ablauf">So funktioniert's</a><a href="#faq">FAQ</a><a href="#top">Impressum</a><a href="#top">Datenschutz</a></nav></div></div>
+  <div class="socket"><div class="container"><span>© 2026 Freise Automatentankstelle</span><nav aria-label="Rechtliches"><a href="#top">Impressum</a><a href="#top">Datenschutz</a></nav></div></div>
 </footer>
 
 <script>
